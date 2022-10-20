@@ -1,0 +1,89 @@
+﻿@page "/clientes"
+@inject HttpClient http
+@inject NavigationManager navigation
+
+<div class="d-flex justify-content-between">
+    <h1>Clientes</h1>
+    <a class="btn btn-primary my-2" href="/clientes/adicao">Adicionar</a>
+</div>
+
+<div class="filtros d-flex flex-wrap border-bottom pb-3">
+    <div class="col-1 mx-1">
+        <label>ID</label>
+        <input @bind="ID" />
+    </div>
+
+    <div class="col-6 mx-1">
+        <label>Descrição</label>
+        <input @bind="Nome" />
+    </div>
+
+    <div class="col-6 mx-1">
+        <label>Descrição</label>
+        <input @bind="CPF" />
+    </div>
+
+    <div class="col-2 mx-1">
+        <label title="Data de Nascimento Inicial">Data Nasc. Inicial</label>
+        <input @bind="DataNascimento" type="date" />
+    </div>
+
+</div>
+
+@if (Clientes is null) {
+    <p>Carregando...</p>
+}
+else if (!Clientes.Any()) {
+    <p>Não foram encontrados registros.</p>
+}
+else {
+    <table class="table table-hover">
+        <thead>
+            <th class="text-center">ID</th>
+            <th class="text-start">Nome</th>
+            <th class="text-center">CPF</th>
+            <th class="text-center">Data de Nascimento</th>
+        </thead>
+
+        <tbody>
+            @foreach (var cliente in Clientes) {
+                <tr>
+                    <td class="text-center">
+                        <a href="/clientes/edicao/@cliente.ID" class="link-info">
+                            @cliente.ID
+                        </a>
+                    </td>
+                    <td class="text-start">@cliente.Nome</td>
+                    <td class="text-center">@cliente.CPF</td>
+                    <td class="text-center">@cliente.DataNascimento.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <p class="fw-bold text-end">Total de registros: @Clientes.Count().ToString("00")</p>
+    </div>
+}
+
+@code {
+    public List<Cliente> Clientes { get; set; }
+
+    int ID { get; set; }
+    string Nome { get; set; }
+    string CPF { get; set; }
+    DateTime DataNascimento { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Pesquisar();
+    }
+
+    async Task Pesquisar()
+    {
+        DataNascimento.ToString("MM/dd/yyyy");
+        var url = $"{navigation.BaseUri}api/clientes/GetClientes";
+        Clientes = await http.GetFromJsonAsync<List<Cliente>>(url);
+    }
+
+}

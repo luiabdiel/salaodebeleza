@@ -13,7 +13,7 @@ namespace salaodebeleza.Data {
 
         }
 
-        public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Servico> Servicos { get; set; }
         public DbSet<Agendamento> Agendamentos { get; set; }
     }
