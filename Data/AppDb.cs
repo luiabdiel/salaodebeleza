@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 
 namespace salaodebeleza.Data {
-    public class ApplicationDbContext : IdentityDbContext {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+    public class AppDb : IdentityDbContext {
+        public AppDb(DbContextOptions<AppDb> options)
             : base(options)
         {
         }
