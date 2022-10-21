@@ -1,8 +1,107 @@
 ﻿@page "/clientes/adicao"
+@page "/clientes/edicao/{id:int}"
+@inject HttpClient http
+@inject NavigationManager navigation
+@inject IJSRuntime js
 
+@if (Cliente is null)
+{
+    <p>Carregando...</p>
+}
+else
+{
+    <EditForm OnValidSubmit="Valid" Model="Cliente" class="">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
 
-<h3>ClienteUpsert</h3>
+        <h1>@Cabecalho()</h1>
+
+        <section class="d-flex flex-wrap">
+            <div class="mx-1 col-6">
+                <label class="form-label">Nome</label>
+                <input class="form-control" @bind="Cliente.Nome" />
+                <ValidationMessage For="(() => Cliente.Nome)" />
+            </div>
+
+            <div class="mx-1 col-2">
+                <label class="form-label">CPF</label>
+                <input class="form-control" @bind="Cliente.CPF" />
+                <ValidationMessage For="(() => Cliente.CPF)" />
+            </div>
+
+            <div class="mx-1 col-2">
+                <label class="form-label">Data de Nascimento</label>
+                <input class="form-control" @bind="Cliente.DataNascimento" type="date" />
+                <ValidationMessage For="(() => Cliente.DataNascimento)" />
+            </div>
+        </section>
+
+        <div class="mx-1 my-4">
+            <button class="btn btn-success">Salvar</button>
+            <a href="/clientes" class="btn btn-primary">Listagem</a>
+
+            @if (!NovoCliente())
+            {
+                <button type="button" @onclick="Apagar" class="btn btn-danger">Apagar</button>
+            }
+        </div>
+    </EditForm>
+}
 
 @code {
+    [Parameter] public int ID { get; set; }
 
+    public Cliente Cliente { get; set; }
+
+    protected override async Task OnInitializedAsync() =>
+        Cliente = NovoCliente() ? new() : await http.GetFromJsonAsync<Cliente>($"{navigation.BaseUri}api/clientes/{ID}");
+
+    async Task Valid()
+    {
+        try
+        {
+            var result = NovoCliente() ? await Adicao() : await Edicao();
+
+            if (!result.IsSuccessStatusCode)
+            {
+                throw new Exception(result.ReasonPhrase);
+            }
+
+            navigation.NavigateTo("/clientes");
+        }
+        catch (Exception ex)
+        {
+            await js.InvokeVoidAsync("alert", ex.Message);
+        }
+    }
+
+    async Task<HttpResponseMessage> Adicao() =>
+        await http.PostAsJsonAsync($"{navigation.BaseUri}api/clientes", Cliente);
+
+    async Task<HttpResponseMessage> Edicao() =>
+        await http.PutAsJsonAsync($"{navigation.BaseUri}api/clientes/{Cliente.ID}", Cliente);
+
+    async Task Apagar()
+    {
+        try
+        {
+            var result = await http.DeleteAsync($"{navigation.BaseUri}api/clientes/{Cliente.ID}");
+
+            if (!result.IsSuccessStatusCode)
+            {
+                throw new Exception(result.ReasonPhrase);
+            }
+
+            navigation.NavigateTo("/clientes");
+        }
+        catch (Exception ex)
+        {
+            await js.InvokeVoidAsync("alert", ex.Message);
+        }
+    }
+
+    string Cabecalho() =>
+        NovoCliente() ? "Novo(a) Cliente" : $"Cliente #{ID}";
+
+    bool NovoCliente() => ID == 0;
 }
