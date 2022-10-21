@@ -1,0 +1,44 @@
+﻿.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-adicionar {
+    background: #0000FF;
+    color: #fff;
+    font-size: 1.125rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-adicionar:hover {
+    background: #000080;
+    transition: background .1s;
+}
+
+.form-container {
+    display: flex;
+    gap: 1rem;
+
+    padding-bottom: 2rem;
+}
+
+.form {
+    display:flex;
+    flex-direction: column;
+}
+
+.form-id {
+    width: 5rem;
+}
+
+.input-id {
+    width: 100%;
+}
+
+.form-descricao {
+    flex: 1;
+}

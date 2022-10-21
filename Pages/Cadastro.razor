@@ -2,29 +2,24 @@
 @inject HttpClient http
 @inject NavigationManager navigation
 
-<div class="d-flex justify-content-between">
+<div class="header">
     <h1>Clientes</h1>
-    <a class="btn btn-primary my-2" href="/clientes/adicao">Adicionar</a>
+    <a class="btn-adicionar" href="/clientes/adicao">Adicionar</a>
 </div>
 
-<div class="filtros d-flex flex-wrap border-bottom pb-3">
-    <div class="col-1 mx-1">
+<div class="form-container">
+    <div class="form form-id">
         <label>ID</label>
-        <input @bind="ID" />
+        <input class="input-id" @bind="ID" />
     </div>
 
-    <div class="col-6 mx-1">
+    <div class="form form-descricao">
         <label>Descrição</label>
         <input @bind="Nome" />
     </div>
 
-    <div class="col-6 mx-1">
-        <label>Descrição</label>
-        <input @bind="CPF" />
-    </div>
-
-    <div class="col-2 mx-1">
-        <label title="Data de Nascimento Inicial">Data Nasc. Inicial</label>
+    <div class="form">
+        <label title="Data de Nascimento Inicial">Data Nascimento</label>
         <input @bind="DataNascimento" type="date" />
     </div>
 
