@@ -24,9 +24,16 @@ namespace salaodebeleza.Controller
         // GET: api/Clientes
         [Route ("{action}")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
+        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes(int id, string info, DateTime dataNascimentoInicial, DateTime dataNascimentoFinal)
         {
-            return await _context.Clientes.ToListAsync();
+            dataNascimentoFinal = dataNascimentoFinal == DateTime.MinValue ? DateTime.MaxValue : dataNascimentoFinal;
+            return await _context.Clientes
+                .Where(x => id > 0 ? x.ID == id : true)
+                .Where(x => !string.IsNullOrEmpty(info) ? x.Nome.ToLower().Contains(info.ToLower()) || x.CPF.Contains(info) : true)
+                .Where(x => x.DataNascimento.Date >= dataNascimentoInicial.Date)
+                .Where(x => x.DataNascimento.Date <= dataNascimentoFinal.Date)
+                .ToListAsync();
+            //return await _context.Clientes.ToListAsync();
         }
 
         // GET: api/Clientes/5

@@ -15,12 +15,18 @@
 
     <div class="form form-descricao">
         <label>Descrição</label>
-        <input @bind="Nome" />
+        <input @bind="Info" />
     </div>
 
     <div class="form">
-        <label title="Data de Nascimento Inicial">Data Nascimento</label>
-        <input @bind="DataNascimento" type="date" />
+        <label title="Data de Nascimento Inicial">Data Nasc. Inicial</label>
+        <input @bind="DataNascimentoInicial" type="date" />
+    </div>
+
+    <div class="form">
+        <label title="Data de Nascimento Final">Data Nasc. Final</label>
+        <input @bind="DataNascimentoFinal" type="date" />
+        <button type="button" @onclick="Pesquisar" class="btn btn-primary mt-3">Pesquisar</button>
     </div>
 
 </div>
@@ -65,20 +71,38 @@ else {
     public List<Cliente> Clientes { get; set; }
 
     int ID { get; set; }
-    string Nome { get; set; }
-    string CPF { get; set; }
-    DateTime DataNascimento { get; set; }
+    string Info { get; set; }
+    DateTime DataNascimentoInicial { get; set; }
+    DateTime DataNascimentoFinal { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
+        ResetarFiltros();
         await Pesquisar();
     }
 
     async Task Pesquisar()
     {
-        DataNascimento.ToString("MM/dd/yyyy");
-        var url = $"{navigation.BaseUri}api/clientes/GetClientes";
-        Clientes = await http.GetFromJsonAsync<List<Cliente>>(url);
+        try
+        {
+            var dataNascimentoInicial = DataNascimentoInicial.ToString("MM/dd/yyyy");
+            var dataNascimentoFinal = DataNascimentoFinal.ToString("MM/dd/yyyy");
+            var url = $"{navigation.BaseUri}api/clientes/GetClientes?id={ID}&info{Info}&dataNascimentoInicial{DataNascimentoInicial}&dataNascimentoFinal{DataNascimentoFinal}";
+            Clientes = await http.GetFromJsonAsync<List<Cliente>>(url);
+
+        }
+        catch (Exception ex)
+        {
+            
+            throw ex;
+        }
+    }
+    void ResetarFiltros()
+    {
+        ID = 0;
+        Info = "";
+        DataNascimentoInicial = DateTime.MinValue;
+        DataNascimentoFinal = DateTime.MaxValue;
     }
 
 }
