@@ -12,14 +12,14 @@ using salaodebeleza.Data;
 namespace salaodebeleza.Data.Migrations
 {
     [DbContext(typeof(AppDb))]
-    [Migration("20221020192544_CriaçãoTabelaCliente")]
-    partial class CriaçãoTabelaCliente
+    [Migration("20221024231705_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.9")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -224,6 +224,25 @@ namespace salaodebeleza.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("salaodebeleza.Models.Agendamento", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("ClienteID")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DataAgendamento")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Agendamentos");
+                });
+
             modelBuilder.Entity("salaodebeleza.Models.Cliente", b =>
                 {
                     b.Property<int>("ID")
@@ -247,7 +266,27 @@ namespace salaodebeleza.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Cliente");
+                    b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("salaodebeleza.Models.Servico", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<double>("Preco")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Servicos");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

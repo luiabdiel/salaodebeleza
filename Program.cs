@@ -1,4 +1,5 @@
 global using salaodebeleza.Models;
+global using salaodebeleza.Helpers;
 using salaodebeleza.Areas.Identity;
 using salaodebeleza.Data;
 using Microsoft.AspNetCore.Components;
@@ -25,8 +26,8 @@ builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuth
 builder.Services.AddHttpClient();
 
 //builder.Services.AddControllersWithViews().AddNewtonsoftJson(options => {
-    //options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-   // options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+//options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+//options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
 //});
 
 var app = builder.Build();

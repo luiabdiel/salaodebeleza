@@ -26,7 +26,12 @@
     <div class="form">
         <label title="Data de Nascimento Final">Data Nasc. Final</label>
         <input @bind="DataNascimentoFinal" type="date" />
+        
+    </div>
+   
+    <div>
         <button type="button" @onclick="Pesquisar" class="btn btn-primary mt-3">Pesquisar</button>
+        <button type="button" @onclick="ResetarFiltros" class="btn btn-primary mt-3">Resetar</button>
     </div>
 
 </div>
@@ -85,11 +90,11 @@ else {
     {
         try
         {
+            var infoTratamento = string.IsNullOrEmpty(Info)? "-":Info;
             var dataNascimentoInicial = DataNascimentoInicial.ToString("MM/dd/yyyy");
             var dataNascimentoFinal = DataNascimentoFinal.ToString("MM/dd/yyyy");
-            var url = $"{navigation.BaseUri}api/clientes/GetClientes?id={ID}&info{Info}&dataNascimentoInicial{DataNascimentoInicial}&dataNascimentoFinal{DataNascimentoFinal}";
+            var url = $"{navigation.BaseUri}api/clientes/GetClientes?id={ID}&info={infoTratamento}&dataNascimentoInicial={dataNascimentoInicial}&dataNascimentoFinal={dataNascimentoFinal}";
             Clientes = await http.GetFromJsonAsync<List<Cliente>>(url);
-
         }
         catch (Exception ex)
         {
