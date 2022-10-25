@@ -112,6 +112,5 @@ namespace salaodebeleza.Controller
         {
             return _context.Clientes.Any(e => e.ID == id);
         }
-
     }
 }

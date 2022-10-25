@@ -90,7 +90,7 @@ else {
     {
         try
         {
-            var infoTratamento = string.IsNullOrEmpty(Info)? "-":Info;
+            var infoTratamento = string.IsNullOrEmpty(Info) ? "-": Info;
             var dataNascimentoInicial = DataNascimentoInicial.ToString("MM/dd/yyyy");
             var dataNascimentoFinal = DataNascimentoFinal.ToString("MM/dd/yyyy");
             var url = $"{navigation.BaseUri}api/clientes/GetClientes?id={ID}&info={infoTratamento}&dataNascimentoInicial={dataNascimentoInicial}&dataNascimentoFinal={dataNascimentoFinal}";

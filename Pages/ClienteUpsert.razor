@@ -10,7 +10,7 @@
 }
 else
 {
-    <EditForm OnValidSubmit="Valid" Model="Cliente" class="">
+    <EditForm OnValidSubmit="Valid" OnInvalidSubmit="Invalid" Model="Cliente" class="">
         <DataAnnotationsValidator />
         <ValidationSummary />
 
@@ -37,12 +37,12 @@ else
         </section>
 
         <div class="mx-1 my-4">
-            <button class="btn btn-success">Salvar</button>
-            <a href="/clientes" class="btn btn-primary">Listagem</a>
+            <button class="btn btn-salvar" >Salvar</button>
+            <a href="/clientes" class="btn btn-listagem">Listagem</a>
 
             @if (!NovoCliente())
             {
-                <button type="button" @onclick="Apagar" class="btn btn-danger">Apagar</button>
+                <button type="button" @onclick="Apagar" class="btn mx-1">Apagar</button>
             }
         </div>
     </EditForm>
@@ -75,6 +75,11 @@ else
         }
     }
 
+    async Task Invalid()
+    {
+        await js.InvokeVoidAsync("alert", "Deu errado");
+    }
+
     async Task<HttpResponseMessage> Adicao() =>
         await http.PostAsJsonAsync($"{navigation.BaseUri}api/clientes", Cliente);
 
@@ -101,7 +106,7 @@ else
     }
 
     string Cabecalho() =>
-        NovoCliente() ? "Novo(a) Cliente" : $"Cliente #{ID}";
+        NovoCliente() ? "Novo(a) Cliente" : $"{Cliente.Nome}";
 
     bool NovoCliente() => ID == 0;
 }

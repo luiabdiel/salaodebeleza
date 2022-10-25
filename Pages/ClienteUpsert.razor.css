@@ -1,0 +1,14 @@
+﻿.btn {
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    background-color: blue;
+    color: white;
+}
+
+.btn-salvar {
+    background-color: #28a745;
+}
+
+.btn-listagem {
+    background-color: #391b4a;
+}
