@@ -25,7 +25,7 @@ else
 
             <div class="mx-1 col-2">
                 <label class="form-label">CPF</label>
-                <input class="form-control" type="number" autocomplete="off" placeholder="000.000.000-00" @bind="Cliente.CPF"/>
+                <input class="form-control" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" autocomplete="off" placeholder="000.000.000-00" @bind="Cliente.CPF" />
                 <ValidationMessage For="(() => Cliente.CPF)" />
             </div>
 
