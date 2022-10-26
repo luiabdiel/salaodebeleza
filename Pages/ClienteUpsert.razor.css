@@ -12,3 +12,12 @@
 .btn-listagem {
     background-color: #391b4a;
 }
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
