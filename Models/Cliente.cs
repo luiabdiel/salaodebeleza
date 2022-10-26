@@ -11,12 +11,12 @@ public class Cliente {
     [Key]
     public int ID { get; set; }
 
-    [Required]
+    [Required(ErrorMessage = "O campo de usuário é obrigatório")]
     [StringLength(60, MinimumLength = 3)]
     public string Nome { get; set; }
 
-    [Required]
-    [StringLength(14, MinimumLength = 14)]
+    [Required(ErrorMessage = "Dígite um CPF válido")]
+    [StringLength(14, MinimumLength = 14, ErrorMessage = "Dígite um CPF válido")]
     public string CPF { get; set; }
 
     public DateTime DataNascimento { get; set; }
