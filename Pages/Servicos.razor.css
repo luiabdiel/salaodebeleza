@@ -5,6 +5,15 @@
 
     margin-bottom: 2rem;
 }
+.btn-adicionar {
+    background: #0000FF;
+    color: #fff;
+    font-size: 1.125rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 .btn-group {
     display:flex;

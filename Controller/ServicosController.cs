@@ -30,6 +30,7 @@ namespace salaodebeleza.Controller
         }
 
         // GET: api/Servicos/5
+        //[Route("{Action}")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Servico>> GetServico(int id)
         {

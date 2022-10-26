@@ -1,0 +1,106 @@
+﻿@page "/servicos/adicao"
+@page "/servicos/edicao/{id:int}"
+@inject HttpClient http
+@inject NavigationManager navigation
+@inject IJSRuntime js
+
+<h3>ServicosUpSert</h3>
+
+@if (Servico is null)
+{
+    <p>Carregando...</p>
+}
+else
+{
+    <EditForm OnValidSubmit="Valid" Model="Servico" class="">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <h1>@Cabecalho()</h1>
+
+    <section class="d-flex flex-wrap">
+        <div class="mx-1 col-6">
+            <label class="form-label">Descriçao</label>
+            <input class="form-control" @bind="Servico.Descricao" placeholder="Dígite o nome do servico" />
+            <ValidationMessage For="(() => Servico.Descricao)" />
+        </div>
+
+        <div class="mx-1 col-6">
+            <label class="form-label">Preço</label>
+            <input class="form-control" @bind="Servico.Preco" placeholder="Dígite o valor" />
+            <ValidationMessage For="(() => Servico.Preco)" />
+        </div>
+    </section>
+
+    <div class="mx-1 my-4">
+        <button class="btn btn-salvar">Salvar</button>
+        <a href="/clientes" class="btn btn-listagem">Listagem</a>
+
+        @if (!NovoServico())
+        {
+            <button type="button" @onclick="Apagar" class="btn mx-1">Apagar</button>
+        }
+    </div>
+</EditForm>
+
+}
+
+@code {
+    [Parameter] public int ID { get; set; }
+    public Servico Servico { get; set; }
+
+
+
+    protected override async Task OnInitializedAsync() =>
+        Servico = NovoServico() ? new() : await http.GetFromJsonAsync<Servico>($"{navigation.BaseUri}api/servicos/{ID}");
+        
+    async Task Valid()
+    {
+        try
+        {
+            var result = NovoServico() ? await Adicao() : await Edicao();
+
+            if (!result.IsSuccessStatusCode)
+            {
+                throw new Exception(result.ReasonPhrase);
+            }
+
+            navigation.NavigateTo("/servicos");
+        }
+        catch (Exception ex)
+        {
+            await js.InvokeVoidAsync("alert", ex.Message);
+        }
+    }
+
+    async Task<HttpResponseMessage> Adicao() =>
+        await http.PostAsJsonAsync($"{navigation.BaseUri}api/servicos", Servico);
+
+    async Task<HttpResponseMessage> Edicao() =>
+        await http.PutAsJsonAsync($"{navigation.BaseUri}api/servicos/{Servico.ID}", Servico);
+
+    async Task Apagar()
+    {
+        try
+        {
+            var result = await http.DeleteAsync($"{navigation.BaseUri}api/servicos/{Servico.ID}");
+
+            if (!result.IsSuccessStatusCode)
+            {
+                throw new Exception(result.ReasonPhrase);
+            }
+
+            navigation.NavigateTo("/servicos");
+        }
+        catch (Exception ex)
+        {
+            await js.InvokeVoidAsync("alert", ex.Message);
+        }
+    }
+
+    string Cabecalho() =>
+        NovoServico() ? "Novo Serviço" : $"{Servico.Descricao}";
+
+    bool NovoServico() => ID == 0;
+
+}

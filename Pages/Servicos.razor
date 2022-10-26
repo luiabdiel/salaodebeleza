@@ -6,7 +6,7 @@
 <div class="header">
     <h3>Nossos Serviços</h3>
     <div class="btn-group">
-        <button>Adicionar</button>
+        <a class="btn-adicionar" href="/servicos/adicao">Adicionar</a>
     </div>
 </div>
 @if (Servicoes is null)
@@ -19,9 +19,8 @@ else if (!Servicoes.Any())
 }
 else
 {
-    @foreach (var servico in Servicoes){
-
-        <div class="row row-cols-1 row-cols-md-3">
+    <div class="row row-cols-1 row-cols-md-3">
+        @foreach (var servico in Servicoes){
             <div class="col mb-4 cards">
                 <div class="card">
                     <img src="https://cdn-icons-png.flaticon.com/512/3220/3220315.png">
@@ -29,12 +28,12 @@ else
                         <h5 class="card-title">@servico.Descricao</h5>
                         <p class="card-text">Preco: R$@servico.Preco</p>
                         <button>Reservar</button>
-                        <button>Editar</button>
+                        <a class="btn-adicionar" href="/servicos/edicao/@servico.ID">Editar</a>
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 }
 
 @code {
