@@ -1,77 +1,58 @@
 ﻿@page "/servicos"
+@inject HttpClient http
+@inject NavigationManager navigation
+
 
 <div class="header">
     <h3>Nossos Serviços</h3>
     <div class="btn-group">
-        <button>Editar</button>
         <button>Adicionar</button>
     </div>
 </div>
+@if (Servicoes is null)
+{
+    <p>Carregando...</p>
+}
+else if (!Servicoes.Any())
+{
+    <p>Não foram encontrados registros.</p>
+}
+else
+{
+    @foreach (var servico in Servicoes){
 
-<div class="row row-cols-1 row-cols-md-3">
-    <div class="col mb-4 cards">
-        <div class="card">
-            <img src="https://cdn-icons-png.flaticon.com/512/3220/3220315.png">
-            <div class="card-body">
-                <h5 class="card-title">Corte de Cabelo</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                <button>Reservar</button>  
+        <div class="row row-cols-1 row-cols-md-3">
+            <div class="col mb-4 cards">
+                <div class="card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3220/3220315.png">
+                    <div class="card-body">
+                        <h5 class="card-title">@servico.Descricao</h5>
+                        <p class="card-text">Preco: R$@servico.Preco</p>
+                        <button>Reservar</button>
+                        <button>Editar</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col mb-4">
-        <div class="card">
-            <img src="https://cdn-icons-png.flaticon.com/512/3220/3220315.png">
-            <div class="card-body">
-                <h5 class="card-title">Corte de Cabelo</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                <button>Reservar</button
-            </div>
-        </div>
-    </div>
-    <div class="col mb-4">
-        <div class="card">
-            <img src="https://cdn-icons-png.flaticon.com/512/3220/3220315.png">
-            <div class="card-body">
-                <h5 class="card-title">Corte de Cabelo</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                <button>Reservar</button
-            </div>
-        </div>
-    </div>
-    <div class="col mb-4">
-        <div class="card">
-            <img src="https://cdn-icons-png.flaticon.com/512/3220/3220315.png">
-            <div class="card-body">
-                <h5 class="card-title">Corte de Cabelo</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                <button>Reservar</button
-            </div>
-        </div>
-    </div>
-    <div class="col mb-4">
-        <div class="card">
-            <img src="https://cdn-icons-png.flaticon.com/512/3220/3220315.png">
-            <div class="card-body">
-                <h5 class="card-title">Corte de Cabelo</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                <button>Reservar</button
-            </div>
-        </div>
-    </div>
-    <div class="col mb-4">
-        <div class="card">
-            <img src="https://cdn-icons-png.flaticon.com/512/3220/3220315.png">
-            <div class="card-body">
-                <h5 class="card-title">Corte de Cabelo</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                <button>Reservar</button
-            </div>
-        </div>
-    </div>
-
-</div>
+    }
+}
 
 @code {
+    public List<Servico> Servicoes { get; set; }
+
+    public int ID { get; set; }
+    public double Preco { get; set; }
+    public string Descricao { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Pesquisar();
+    }
+
+    async Task Pesquisar()
+    {
+        var url = $"{navigation.BaseUri}api/servicos/GetServicos";
+        Servicoes = await http.GetFromJsonAsync<List<Servico>>(url);
+    }
 
 }
