@@ -10,7 +10,7 @@ using salaodebeleza.Models;
 
 namespace salaodebeleza.Controller
 {
-    [Route("api/[controller]")]
+    [Route("api/servicos")]
     [ApiController]
     public class ServicosController : ControllerBase
     {

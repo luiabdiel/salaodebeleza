@@ -11,20 +11,6 @@ namespace salaodebeleza.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Agendamentos",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ClienteID = table.Column<int>(type: "integer", nullable: false),
-                    DataAgendamento = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Agendamentos", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -198,6 +184,53 @@ namespace salaodebeleza.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Vendas",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DataEmissao = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ClienteID = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vendas", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Vendas_Clientes_ClienteID",
+                        column: x => x.ClienteID,
+                        principalTable: "Clientes",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VendasItens",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Preco = table.Column<double>(type: "double precision", nullable: false),
+                    ServicoID = table.Column<int>(type: "integer", nullable: false),
+                    VendaID = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VendasItens", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_VendasItens_Servicos_ServicoID",
+                        column: x => x.ServicoID,
+                        principalTable: "Servicos",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_VendasItens_Vendas_VendaID",
+                        column: x => x.VendaID,
+                        principalTable: "Vendas",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -234,13 +267,25 @@ namespace salaodebeleza.Data.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vendas_ClienteID",
+                table: "Vendas",
+                column: "ClienteID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VendasItens_ServicoID",
+                table: "VendasItens",
+                column: "ServicoID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VendasItens_VendaID",
+                table: "VendasItens",
+                column: "VendaID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Agendamentos");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -257,16 +302,22 @@ namespace salaodebeleza.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Clientes");
-
-            migrationBuilder.DropTable(
-                name: "Servicos");
+                name: "VendasItens");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Servicos");
+
+            migrationBuilder.DropTable(
+                name: "Vendas");
+
+            migrationBuilder.DropTable(
+                name: "Clientes");
         }
     }
 }

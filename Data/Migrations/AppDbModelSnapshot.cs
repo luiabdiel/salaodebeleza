@@ -222,25 +222,6 @@ namespace salaodebeleza.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("salaodebeleza.Models.Agendamento", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("ClienteID")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("DataAgendamento")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Agendamentos");
-                });
-
             modelBuilder.Entity("salaodebeleza.Models.Cliente", b =>
                 {
                     b.Property<int>("ID")
@@ -285,6 +266,53 @@ namespace salaodebeleza.Data.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Servicos");
+                });
+
+            modelBuilder.Entity("salaodebeleza.Models.Venda", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("ClienteID")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DataEmissao")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ClienteID");
+
+                    b.ToTable("Vendas");
+                });
+
+            modelBuilder.Entity("salaodebeleza.Models.VendaItem", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+
+                    b.Property<double>("Preco")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("ServicoID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("VendaID")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ServicoID");
+
+                    b.HasIndex("VendaID");
+
+                    b.ToTable("VendasItens");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -336,6 +364,51 @@ namespace salaodebeleza.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("salaodebeleza.Models.Venda", b =>
+                {
+                    b.HasOne("salaodebeleza.Models.Cliente", "Cliente")
+                        .WithMany("Vendas")
+                        .HasForeignKey("ClienteID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("salaodebeleza.Models.VendaItem", b =>
+                {
+                    b.HasOne("salaodebeleza.Models.Servico", "Servico")
+                        .WithMany("Itens")
+                        .HasForeignKey("ServicoID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("salaodebeleza.Models.Venda", "Venda")
+                        .WithMany("Itens")
+                        .HasForeignKey("VendaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Servico");
+
+                    b.Navigation("Venda");
+                });
+
+            modelBuilder.Entity("salaodebeleza.Models.Cliente", b =>
+                {
+                    b.Navigation("Vendas");
+                });
+
+            modelBuilder.Entity("salaodebeleza.Models.Servico", b =>
+                {
+                    b.Navigation("Itens");
+                });
+
+            modelBuilder.Entity("salaodebeleza.Models.Venda", b =>
+                {
+                    b.Navigation("Itens");
                 });
 #pragma warning restore 612, 618
         }

@@ -25,10 +25,10 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 builder.Services.AddHttpClient();
 
-//builder.Services.AddControllersWithViews().AddNewtonsoftJson(options => {
-//options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-//options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-//});
+builder.Services.AddControllersWithViews().AddNewtonsoftJson(options => {
+options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+});
 
 var app = builder.Build();
 
