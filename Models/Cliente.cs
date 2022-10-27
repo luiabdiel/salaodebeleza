@@ -21,5 +21,6 @@ public class Cliente {
 
     public DateTime DataNascimento { get; set; }
     public List<Venda> Vendas { get; set; }
+
 }
 

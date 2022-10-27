@@ -4,8 +4,6 @@
 @inject NavigationManager navigation
 @inject IJSRuntime js
 
-<h3>ServicosUpSert</h3>
-
 @if (Servico is null)
 {
     <p>Carregando...</p>
@@ -27,18 +25,18 @@ else
 
         <div class="mx-1 col-6">
             <label class="form-label">Preço</label>
-            <input class="form-control" @bind="Servico.Preco" placeholder="Dígite o valor" />
+            <input class="form-control input-preco" type="number" @bind="Servico.Preco" placeholder="Dígite o valor" />
             <ValidationMessage For="(() => Servico.Preco)" />
         </div>
     </section>
 
     <div class="mx-1 my-4">
-        <button class="btn btn-salvar">Salvar</button>
-        <a href="/clientes" class="btn btn-listagem">Listagem</a>
+        <button class="btn btn-salvar btn-success">Salvar</button>
+            <a href="/clientes" class="btn btn-listagem btn-primary">Listagem</a>
 
         @if (!NovoServico())
         {
-            <button type="button" @onclick="Apagar" class="btn mx-1">Apagar</button>
+                <button type="button" @onclick="Apagar" class="btn btn btn-danger mx-1">Apagar</button>
         }
     </div>
 </EditForm>
