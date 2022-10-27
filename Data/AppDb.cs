@@ -27,31 +27,10 @@ namespace salaodebeleza.Data {
                 .OnDelete(DeleteBehavior.Restrict);
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-
-            builder.Entity<Venda>()
-                .HasOne(venda => venda.Cliente)
-                .WithMany(cliente => cliente.Vendas)
-                .IsRequired(true)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<VendaItem>()
-                .HasOne(venda => venda.Servico)
-                .WithMany(produto => produto.Itens)
-                .IsRequired(true)
-                .OnDelete(DeleteBehavior.Restrict);
-        }
-
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Servico> Servicos { get; set; }
-<<<<<<< HEAD
         public DbSet<VendaItem> VendasItens { get; set; }
         public DbSet<Venda> Vendas { get; set; }
-=======
-        public DbSet<Venda> Vendas { get; set; }
-        public DbSet<VendaItem> VendaItens { get; set; }
->>>>>>> cb2d6dce5daac80ad08537b1ed8c5c220ad74101
+
     }
 }

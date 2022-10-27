@@ -190,11 +190,7 @@ namespace salaodebeleza.Data.Migrations
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-<<<<<<<< HEAD:Data/Migrations/20221027233636_First.cs
                     DataEmissao = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-========
-                    DataDeEmissao = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
->>>>>>>> cb2d6dce5daac80ad08537b1ed8c5c220ad74101:Data/Migrations/20221026231943_First.cs
                     ClienteID = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -209,11 +205,7 @@ namespace salaodebeleza.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:Data/Migrations/20221027233636_First.cs
                 name: "VendasItens",
-========
-                name: "VendaItens",
->>>>>>>> cb2d6dce5daac80ad08537b1ed8c5c220ad74101:Data/Migrations/20221026231943_First.cs
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
@@ -224,25 +216,15 @@ namespace salaodebeleza.Data.Migrations
                 },
                 constraints: table =>
                 {
-<<<<<<<< HEAD:Data/Migrations/20221027233636_First.cs
                     table.PrimaryKey("PK_VendasItens", x => x.ID);
                     table.ForeignKey(
                         name: "FK_VendasItens_Servicos_ServicoID",
-========
-                    table.PrimaryKey("PK_VendaItens", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_VendaItens_Servicos_ServicoID",
->>>>>>>> cb2d6dce5daac80ad08537b1ed8c5c220ad74101:Data/Migrations/20221026231943_First.cs
                         column: x => x.ServicoID,
                         principalTable: "Servicos",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-<<<<<<<< HEAD:Data/Migrations/20221027233636_First.cs
                         name: "FK_VendasItens_Vendas_VendaID",
-========
-                        name: "FK_VendaItens_Vendas_VendaID",
->>>>>>>> cb2d6dce5daac80ad08537b1ed8c5c220ad74101:Data/Migrations/20221026231943_First.cs
                         column: x => x.VendaID,
                         principalTable: "Vendas",
                         principalColumn: "ID",
@@ -287,7 +269,6 @@ namespace salaodebeleza.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-<<<<<<<< HEAD:Data/Migrations/20221027233636_First.cs
                 name: "IX_Vendas_ClienteID",
                 table: "Vendas",
                 column: "ClienteID");
@@ -301,21 +282,6 @@ namespace salaodebeleza.Data.Migrations
                 name: "IX_VendasItens_VendaID",
                 table: "VendasItens",
                 column: "VendaID");
-========
-                name: "IX_VendaItens_ServicoID",
-                table: "VendaItens",
-                column: "ServicoID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_VendaItens_VendaID",
-                table: "VendaItens",
-                column: "VendaID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vendas_ClienteID",
-                table: "Vendas",
-                column: "ClienteID");
->>>>>>>> cb2d6dce5daac80ad08537b1ed8c5c220ad74101:Data/Migrations/20221026231943_First.cs
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -336,11 +302,7 @@ namespace salaodebeleza.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-<<<<<<<< HEAD:Data/Migrations/20221027233636_First.cs
                 name: "VendasItens");
-========
-                name: "VendaItens");
->>>>>>>> cb2d6dce5daac80ad08537b1ed8c5c220ad74101:Data/Migrations/20221026231943_First.cs
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

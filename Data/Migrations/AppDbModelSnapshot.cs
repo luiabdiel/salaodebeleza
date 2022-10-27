@@ -279,11 +279,7 @@ namespace salaodebeleza.Data.Migrations
                     b.Property<int>("ClienteID")
                         .HasColumnType("integer");
 
-<<<<<<< HEAD
                     b.Property<DateTime>("DataEmissao")
-=======
-                    b.Property<DateTime>("DataDeEmissao")
->>>>>>> cb2d6dce5daac80ad08537b1ed8c5c220ad74101
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("ID");
@@ -316,11 +312,7 @@ namespace salaodebeleza.Data.Migrations
 
                     b.HasIndex("VendaID");
 
-<<<<<<< HEAD
                     b.ToTable("VendasItens");
-=======
-                    b.ToTable("VendaItens");
->>>>>>> cb2d6dce5daac80ad08537b1ed8c5c220ad74101
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

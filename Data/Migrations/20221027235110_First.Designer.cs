@@ -12,11 +12,7 @@ using salaodebeleza.Data;
 namespace salaodebeleza.Data.Migrations
 {
     [DbContext(typeof(AppDb))]
-<<<<<<<< HEAD:Data/Migrations/20221027233636_First.Designer.cs
-    [Migration("20221027233636_First")]
-========
-    [Migration("20221026231943_First")]
->>>>>>>> cb2d6dce5daac80ad08537b1ed8c5c220ad74101:Data/Migrations/20221026231943_First.Designer.cs
+    [Migration("20221027235110_First")]
     partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -285,11 +281,7 @@ namespace salaodebeleza.Data.Migrations
                     b.Property<int>("ClienteID")
                         .HasColumnType("integer");
 
-<<<<<<<< HEAD:Data/Migrations/20221027233636_First.Designer.cs
                     b.Property<DateTime>("DataEmissao")
-========
-                    b.Property<DateTime>("DataDeEmissao")
->>>>>>>> cb2d6dce5daac80ad08537b1ed8c5c220ad74101:Data/Migrations/20221026231943_First.Designer.cs
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("ID");
@@ -322,11 +314,7 @@ namespace salaodebeleza.Data.Migrations
 
                     b.HasIndex("VendaID");
 
-<<<<<<<< HEAD:Data/Migrations/20221027233636_First.Designer.cs
                     b.ToTable("VendasItens");
-========
-                    b.ToTable("VendaItens");
->>>>>>>> cb2d6dce5daac80ad08537b1ed8c5c220ad74101:Data/Migrations/20221026231943_First.Designer.cs
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
