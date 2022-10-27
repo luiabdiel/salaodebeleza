@@ -5,9 +5,7 @@
 
 <div class="header">
     <h3>Nossos Serviços</h3>
-    <div class="btn-group">
-        <a class="btn-adicionar" href="/servicos/adicao">Adicionar</a>
-    </div>
+        <a class="btn btn-adicionar" href="/servicos/adicao">Adicionar</a>
 </div>
 @if (Servicoes is null)
 {
@@ -25,10 +23,10 @@ else
                 <div class="card">
                     <img src="https://cdn-icons-png.flaticon.com/512/3220/3220315.png">
                     <div class="card-body">
-                        <h5 class="card-title">@servico.Descricao</h5>
-                        <p class="card-text">Preco: R$@servico.Preco</p>
-                        <button>Reservar</button>
-                        <a class="btn-adicionar" href="/servicos/edicao/@servico.ID">Editar</a>
+                        <h2>@servico.Descricao</h2>
+                        <p class="card-text">Preco: <span class="text-price">R$@servico.Preco</span></p>
+                        <button class="btn btn-reservar">Reservar</button>
+                        <a class="btn btn-editar" href="/servicos/edicao/@servico.ID">Editar</a>
                     </div>
                 </div>
             </div>
