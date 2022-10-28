@@ -28,12 +28,14 @@ namespace salaodebeleza.Models
         [Range(1, int.MaxValue)]
         [ForeignKey("ServicoID")]
         public int ServicoID { get; set; }
-
         public Servico Servico { get; set; }
+
 
         [ForeignKey("VendaID")]
         public int VendaID { get; set; }
-
         public Venda Venda { get; set; }
+
+        public double ValorTotal() =>
+        Preco;
     }
 }

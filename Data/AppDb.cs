@@ -10,22 +10,22 @@ namespace salaodebeleza.Data {
             AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+        //    base.OnModelCreating(builder);
 
-            builder.Entity<Venda>()
-                .HasOne(venda => venda.Cliente)
-                .WithMany(cliente => cliente.Vendas)
-                .IsRequired(true)
-                .OnDelete(DeleteBehavior.Restrict);
+        //    builder.Entity<Venda>()
+        //        .HasOne(venda => venda.Cliente)
+        //        .WithMany(cliente => cliente.Vendas)
+        //        .IsRequired(true)
+        //        .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<VendaItem>()
-                .HasOne(venda => venda.Servico)
-                .WithMany(produto => produto.Itens)
-                .IsRequired(true)
-                .OnDelete(DeleteBehavior.Restrict);
-        }
+        //    builder.Entity<VendaItem>()
+        //        .HasOne(venda => venda.Servico)
+        //        .WithMany(produto => produto.Itens)
+        //        .IsRequired(true)
+        //        .OnDelete(DeleteBehavior.Restrict);
+        //}
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Servico> Servicos { get; set; }

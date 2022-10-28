@@ -12,4 +12,5 @@ public class QuantidadeItens : ValidationAttribute
     }
 
     bool TemItens() => Venda.Itens?.Any() ?? false;
+
 }
