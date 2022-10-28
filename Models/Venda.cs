@@ -1,18 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using salaodebeleza.Models.CustomValidations.Vendas;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace salaodebeleza.Models {
-    public class Venda {
+namespace salaodebeleza.Models;
+public class Venda
+{
 
         public Venda()
         {
-            DataDeEmissao = DateTime.Now;
+        DataEmissao = DateTime.Now;
+        Itens = new();
         }
 
         [Key]
         public int ID { get; set; }
 
-        public DateTime DataDeEmissao { get; set; }
+    public DateTime DataEmissao { get; set; }
 
         [Range(1, int.MaxValue)]
         [ForeignKey("ClienteID")]
@@ -20,7 +23,7 @@ namespace salaodebeleza.Models {
 
         public Cliente Cliente { get; set; }
 
-        //[QuantidadeItens]
+    [QuantidadeItens]
         public List<VendaItem> Itens { get; set; }
     }
 }

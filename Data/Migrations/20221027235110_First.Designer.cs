@@ -12,7 +12,7 @@ using salaodebeleza.Data;
 namespace salaodebeleza.Data.Migrations
 {
     [DbContext(typeof(AppDb))]
-    [Migration("20221026231943_First")]
+    [Migration("20221027235110_First")]
     partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -281,7 +281,7 @@ namespace salaodebeleza.Data.Migrations
                     b.Property<int>("ClienteID")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("DataDeEmissao")
+                    b.Property<DateTime>("DataEmissao")
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("ID");
@@ -314,7 +314,7 @@ namespace salaodebeleza.Data.Migrations
 
                     b.HasIndex("VendaID");
 
-                    b.ToTable("VendaItens");
+                    b.ToTable("VendasItens");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

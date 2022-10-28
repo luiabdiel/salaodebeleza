@@ -3,15 +3,20 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using KeyAttribute = System.ComponentModel.DataAnnotations.KeyAttribute;
 
-namespace salaodebeleza.Models {
-    public class VendaItem {
+namespace salaodebeleza.Models
+{
+    public class VendaItem
+    {
         public VendaItem()
         {
 
         }
-        public VendaItem(double quantidade, double preco, int produtoID, Servico servico)
+        public VendaItem(double preco, int produtoID, Servico servico)
         {
             Preco = preco;
+            ServicoID = produtoID;
+            Servico = servico;
+
         }
 
         [Key]
@@ -29,6 +34,6 @@ namespace salaodebeleza.Models {
         [ForeignKey("VendaID")]
         public int VendaID { get; set; }
 
-        public Venda Venda { get;set; }
+        public Venda Venda { get; set; }
     }
 }

@@ -190,7 +190,7 @@ namespace salaodebeleza.Data.Migrations
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    DataDeEmissao = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DataEmissao = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     ClienteID = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -205,7 +205,7 @@ namespace salaodebeleza.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "VendaItens",
+                name: "VendasItens",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
@@ -216,15 +216,15 @@ namespace salaodebeleza.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VendaItens", x => x.ID);
+                    table.PrimaryKey("PK_VendasItens", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_VendaItens_Servicos_ServicoID",
+                        name: "FK_VendasItens_Servicos_ServicoID",
                         column: x => x.ServicoID,
                         principalTable: "Servicos",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_VendaItens_Vendas_VendaID",
+                        name: "FK_VendasItens_Vendas_VendaID",
                         column: x => x.VendaID,
                         principalTable: "Vendas",
                         principalColumn: "ID",
@@ -269,19 +269,19 @@ namespace salaodebeleza.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_VendaItens_ServicoID",
-                table: "VendaItens",
-                column: "ServicoID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_VendaItens_VendaID",
-                table: "VendaItens",
-                column: "VendaID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Vendas_ClienteID",
                 table: "Vendas",
                 column: "ClienteID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VendasItens_ServicoID",
+                table: "VendasItens",
+                column: "ServicoID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VendasItens_VendaID",
+                table: "VendasItens",
+                column: "VendaID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -302,7 +302,7 @@ namespace salaodebeleza.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "VendaItens");
+                name: "VendasItens");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

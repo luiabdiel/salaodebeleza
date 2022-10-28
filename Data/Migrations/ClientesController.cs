@@ -21,6 +21,7 @@ namespace salaodebeleza.Data.Migrations
             _context = context;
         }
 
+        // GET: api/Clientes
         [Route("{action}")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes(int id, string info, DateTime dataNascimentoInicial, DateTime dataNascimentoFinal)

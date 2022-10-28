@@ -4,18 +4,16 @@ using salaodebeleza.Models;
 
 namespace salaodebeleza.Data {
     public class AppDb : IdentityDbContext {
-        public AppDb(DbContextOptions<AppDb> options)
-            : base(options)
+        public AppDb(DbContextOptions<AppDb> options): base(options)
         {
-
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
-
         }
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Servico> Servicos { get; set; }
+        public DbSet<VendaItem> VendasItens { get; set; }
         public DbSet<Venda> Vendas { get; set; }
-        public DbSet<VendaItem> VendaItens { get; set; }
+
     }
 }
