@@ -23,9 +23,9 @@ public class Venda
 
         public Cliente Cliente { get; set; }
 
-    [QuantidadeItens]
+        [QuantidadeItens]
         public List<VendaItem> Itens { get; set; }
 
-    //public double ValorTotal() =>
-        //Itens.Sum(item => item.ValorTotal());
+        public double ValorTotal() =>
+            Itens.Sum(item => item.ValorTotal());
 }

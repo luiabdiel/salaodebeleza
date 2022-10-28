@@ -7,6 +7,7 @@ public class Servico {
     public int ID { get; set; }
 
     [Required]
+    [Range(0.01, double.MaxValue, ErrorMessage = "Preço deve ser informado.")]
     public double Preco { get; set; }
 
     [Required]
