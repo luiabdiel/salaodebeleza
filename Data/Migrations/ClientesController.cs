@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using salaodebeleza.Data;
 using salaodebeleza.Models;
 
-namespace salaodebeleza.Controller
+namespace salaodebeleza.Data.Migrations
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -21,8 +21,7 @@ namespace salaodebeleza.Controller
             _context = context;
         }
 
-        // GET: api/Clientes
-        [Route ("{action}")]
+        [Route("{action}")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes(int id, string info, DateTime dataNascimentoInicial, DateTime dataNascimentoFinal)
         {
@@ -86,17 +85,10 @@ namespace salaodebeleza.Controller
         [HttpPost]
         public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
         {
-
-            if (ClienteExistsCpf(cliente.CPF))
-            {
-                return NotFound();
-            }
-            else
-            {
             _context.Clientes.Add(cliente);
             await _context.SaveChangesAsync();
+
             return CreatedAtAction("GetCliente", new { id = cliente.ID }, cliente);
-            }
         }
 
         // DELETE: api/Clientes/5
@@ -122,7 +114,7 @@ namespace salaodebeleza.Controller
         private bool ClienteExistsCpf(string cpf)
         {
             return _context.Clientes.Any(e => e.CPF.Equals(cpf));
-            
+
         }
     }
 }

@@ -1,0 +1,19 @@
+﻿.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn {
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    color: white;
+}
+
+.btn-adicionar {
+    background-color: #0000FF;
+}
+
+.btn-adicionar:hover {
+    background: #000080;
+}

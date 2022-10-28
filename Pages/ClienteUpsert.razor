@@ -19,13 +19,13 @@ else
         <section class="d-flex flex-wrap">
             <div class="mx-1 col-6">
                 <label class="form-label">Nome</label>
-                <input class="form-control" @bind="Cliente.Nome" placeholder="Dígite seu nome completo" />
+                <input class="form-control" pattern="[A-Z][a-z].* [A-Z][a-z].*" oninvalid="setCustomValidity('Dígite o nome e sobrenome')" required @bind="Cliente.Nome" placeholder="Dígite seu nome completo" />
                 <ValidationMessage For="(() => Cliente.Nome)" />
             </div>
 
             <div class="mx-1 col-2">
                 <label class="form-label">CPF</label>
-                <input class="form-control" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" autocomplete="off" placeholder="000.000.000-00" @bind="Cliente.CPF" />
+                <input class="form-control" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" oninvalid="setCustomValidity('Dígite no formato de 000.000.000-00')" autocomplete="off" placeholder="000.000.000-00" @bind="Cliente.CPF" />
                 <ValidationMessage For="(() => Cliente.CPF)" />
             </div>
 

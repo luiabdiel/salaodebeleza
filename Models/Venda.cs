@@ -22,7 +22,5 @@ namespace salaodebeleza.Models {
 
         //[QuantidadeItens]
         public List<VendaItem> Itens { get; set; }
-
-
     }
 }

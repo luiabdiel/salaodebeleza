@@ -22,15 +22,14 @@ namespace salaodebeleza.Controller
         }
 
         // GET: api/Servicos
-        [Route("{Action}")]
         [HttpGet]
+        [Route("{action}")]
         public async Task<ActionResult<IEnumerable<Servico>>> GetServicos()
         {
             return await _context.Servicos.ToListAsync();
         }
 
         // GET: api/Servicos/5
-        //[Route("{Action}")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Servico>> GetServico(int id)
         {
