@@ -101,7 +101,7 @@ else
     }
 
     string Cabecalho() =>
-        NovoCliente() ? "Novo(a) Cliente" : $"{Cliente.Nome}";
+        NovoCliente() ? "Novo(a) Cliente" : $"#{Cliente.ID} - {Cliente.Nome}";
 
     bool NovoCliente() => ID == 0;
 }
