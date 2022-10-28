@@ -20,5 +20,7 @@ public class Cliente {
     public string CPF { get; set; }
 
     public DateTime DataNascimento { get; set; }
+    public List<Venda> Vendas { get; set; }
+
 }
 

@@ -25,5 +25,7 @@ public class Venda
 
     [QuantidadeItens]
         public List<VendaItem> Itens { get; set; }
+
+
     }
 }

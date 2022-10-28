@@ -6,9 +6,12 @@ public class Servico {
     [Key]
     public int ID { get; set; }
 
-    [Required(ErrorMessage = "O preço deve ser informado!")]
+    [Required]
     public double Preco { get; set; }
 
-    [Required(ErrorMessage = "O campo de descrição precisa ser preenchido!")]
+    [Required]
     public string Descricao { get; set; }
+
+    public List<VendaItem> Itens { get; set; }
+
 }
