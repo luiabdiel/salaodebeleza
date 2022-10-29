@@ -12,7 +12,7 @@ using salaodebeleza.Data;
 namespace salaodebeleza.Data.Migrations
 {
     [DbContext(typeof(AppDb))]
-    [Migration("20221027235110_First")]
+    [Migration("20221028235757_First")]
     partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

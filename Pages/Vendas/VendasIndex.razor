@@ -1,0 +1,59 @@
+﻿@page "/vendas"
+@inject HttpClient http
+@inject NavigationManager navigation
+
+<div class="d-flex justify-content-between">
+    <h1>Vendas</h1>
+    <a class="btn btn-primary my-2" href="/vendas/adicao">Adicionar</a>
+</div>
+
+@if (Vendas is null) {
+    <p>Carregando...</p>
+}
+else if (!Vendas.Any()) {
+    <p>Não foram encontrados registros.</p>
+}
+else {
+    <table class="table table-hover">
+        <thead>
+            <th class="text-center">ID</th>
+            <th class="text-start">Cliente</th>
+            <th class="text-center">Data de Emissão</th>
+            <th class="text-end">Valor Total</th>
+        </thead>
+
+        <tbody>
+            @foreach (var venda in Vendas) {
+                <tr>
+                    <td class="text-center">
+                        <a href="/vendas/edicao/@venda.ID" class="link-info">
+                            @venda.ID
+                        </a>
+                    </td>
+                    <td class="text-start">@venda.Cliente.Nome</td>
+                    <td class="text-center">@venda.DataEmissao.ToShortDateString()</td>
+                    @* <td class="text-end">@venda.ValorTotal().Formatado()</td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <p class="fw-bold text-end">Total de registros: @Vendas.Count().ToString("00")</p>
+    </div>
+}
+
+@code {
+    public List<Venda> Vendas { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Pesquisar();
+    }
+
+    async Task Pesquisar()
+    {
+        var url = $"{navigation.BaseUri}api/vendas/GetVendas";
+        Vendas = await http.GetFromJsonAsync<List<Venda>>(url);
+    }
+}
