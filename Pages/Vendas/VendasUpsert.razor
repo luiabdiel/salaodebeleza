@@ -1,6 +1,4 @@
-﻿@*
-
-@page "/vendas/adicao"
+﻿@page "/vendas/adicao"
 @page "/vendas/edicao/{id:int}"
 @inject HttpClient http
 @inject NavigationManager navigation
@@ -104,25 +102,53 @@ else
 
 @code {
     [Parameter] public int ID { get; set; }
-
+   
     public Venda Venda { get; set; }
     public List<Cliente> Clientes { get; set; }
+
     public List<Servico> Servicos { get; set; }
     public int ServicoIdAtual { get; set; }
     public double QuantidadeAtual { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        Clientes = await http.GetFromJsonAsync<List<Cliente>>($"{navigation.BaseUri}api/clientes/GetClientes");
-        Servicos = await http.GetFromJsonAsync<List<Servico>>($"{navigation.BaseUri}api/produtos/GetServicos");
-        Venda = NovaVenda() ? new() : await http.GetFromJsonAsync<Venda>($"{navigation.BaseUri}api/vendas/{ID}");
+        try
+        {
+            Clientes = await http.GetFromJsonAsync<List<Cliente>>($"{navigation.BaseUri}api/clientes");
+        }
+        catch (Exception ex)
+        {
+            
+            throw ex;
+        }
+
+        try
+        {
+            Servicos = await http.GetFromJsonAsync<List<Servico>>($"{navigation.BaseUri}api/servicos/GetServicos");
+
+        }
+        catch (Exception ex)
+        {
+            
+            throw ex;
+        }
+        try
+        {
+
+            Venda = NovaVenda() ? new() : await http.GetFromJsonAsync<Venda>($"{navigation.BaseUri}api/vendas/{ID}");
+        }
+        catch (Exception ex)
+        {
+            
+            throw ex;
+        }
     }
 
     async Task Valid()
     {
         try
         {
-            if (NovaVenda())
+            if (Venda.ID == 0)
             {
                 var result = await http.PostAsJsonAsync($"{navigation.BaseUri}api/vendas", Venda);
 
@@ -158,10 +184,10 @@ else
                 throw new Exception("Servico deve ser selecionado.");
             }
 
-            //if (QuantidadeAtual == 0)
-            //{
-            //    throw new Exception("Quantidade deve ser informada.");
-            //}
+            if (QuantidadeAtual == 0)
+            {
+                throw new Exception("Quantidade deve ser informada.");
+            }
 
             var produtoSelecionado = Servicos.Find(prod => prod.ID == ServicoIdAtual);
             var item = new VendaItem(produtoSelecionado.Preco, ServicoIdAtual, produtoSelecionado);
@@ -169,7 +195,7 @@ else
             Venda.Itens.Add(item);
 
             ServicoIdAtual = 0;
-            //QuantidadeAtual = 0;
+            QuantidadeAtual = 0;
         }
         catch (Exception ex)
         {
@@ -191,4 +217,3 @@ else
         Venda is null || Clientes is null || Servicos is null;
 }
 
-*@

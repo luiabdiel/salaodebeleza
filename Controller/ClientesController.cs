@@ -35,6 +35,12 @@ namespace salaodebeleza.Controller
                 .ToListAsync();
             //return await _context.Clientes.ToListAsync();
         }
+        
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Cliente>>> GetClientes()
+        {
+            return await _context.Clientes.ToListAsync();
+        }
 
         // GET: api/Clientes/5
         [HttpGet("{id}")]
@@ -115,14 +121,14 @@ namespace salaodebeleza.Controller
             return NoContent();
         }
 
-        private bool ClienteExists(int id)
-        {
-            return _context.Clientes.Any(e => e.ID == id);
-        }
-        private bool ClienteExistsCpf(string cpf)
-        {
-            return _context.Clientes.Any(e => e.CPF.Equals(cpf));
+        private bool ClienteExists(int id)=>
+            _context.Clientes.Any(e => e.ID == id);
+        
+        private bool ClienteExistsCpf(string cpf) =>
+            _context.Clientes.Any(e => e.CPF.Equals(cpf));
             
-        }
+        
+        bool ClienteEmUso(int clienteID) =>
+            _context.Vendas.Any(x => x.ClienteID == clienteID);
     }
 }

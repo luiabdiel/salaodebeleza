@@ -37,6 +37,7 @@ namespace salaodebeleza.Controller {
         }
 
         // GET: api/Vendas/5
+        //[Route("{Action}")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Venda>> GetVenda(int id)
         {
