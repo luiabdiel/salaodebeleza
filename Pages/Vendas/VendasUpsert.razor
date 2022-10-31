@@ -6,7 +6,7 @@
 
 @if (Carregando())
 {
-    <p>Carregando...</p>
+    <Reload />
 }
 else
 {
@@ -35,10 +35,10 @@ else
             </div>
         </section>
 
-        <section class="my-4">
+        <section class="my-4 ">
             <h6 class="w-100 fw-bold">Servicos</h6>
 
-            <div class="d-flex flex-wrap ">
+            <div class="d-flex flex-wrap">
                 <div class="mx-1 col-6">
                     <label class="form-label">Servico</label>
                     <select @bind="ServicoIdAtual" class="form-select">
@@ -55,7 +55,7 @@ else
                 </div>
 
                 <div>
-                    <button type="button" @onclick="AdicionarServico" class="btn btn-success mt-4">Adicionar</button>
+                    <button type="button" @onclick="AdicionarServico" class="btn btn-success">Adicionar</button>
                 </div>
             </div>
 

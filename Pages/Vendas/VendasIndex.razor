@@ -8,7 +8,7 @@
 </div>
 
 @if (Vendas is null) {
-    <p>Carregando...</p>
+    <Reload />
 }
 else if (!Vendas.Any()) {
     <p>Não foram encontrados registros.</p>

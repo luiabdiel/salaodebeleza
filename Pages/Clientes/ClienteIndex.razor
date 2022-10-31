@@ -37,7 +37,7 @@
 </div>
 
 @if (Clientes is null) {
-    <p>Carregando...</p>
+    <Reload />
 }
 else if (!Clientes.Any()) {
     <p>Não foram encontrados registros.</p>
