@@ -12,8 +12,8 @@ using salaodebeleza.Data;
 namespace salaodebeleza.Data.Migrations
 {
     [DbContext(typeof(AppDb))]
-    [Migration("20221101182701_newModel2")]
-    partial class newModel2
+    [Migration("20221101222605_NewModel1")]
+    partial class NewModel1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -268,8 +268,8 @@ namespace salaodebeleza.Data.Migrations
                     b.Property<double>("Quantidade")
                         .HasColumnType("double precision");
 
-                    b.Property<bool>("Tipo")
-                        .HasColumnType("boolean");
+                    b.Property<int>("Tipo")
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 

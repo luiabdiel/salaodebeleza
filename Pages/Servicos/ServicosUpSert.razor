@@ -29,9 +29,15 @@ else
             <ValidationMessage For="(() => Servico.Preco)" />
         </div>
         <div class="form-check form-switch mx-1 col-6 mt-2">
-            <input class="form-check-input" id="flexSwitchCheckDefault" type="checkbox" @bind="Servico.Tipo" />
+            <input class="form-check-input" id="flexSwitchCheckDefault" type="checkbox" @bind="Servico.Tipo" value="1" />
             <ValidationMessage For="(() => Servico.Tipo)" />
             <label class="form-check-label" for="flexSwitchCheckDefault">Produto</label>
+        </div>
+        <div class="form-check form-switch mx-1 col-6 mt-2">
+            <select>
+                <option @bind="Servico.Tipo" value="1">1 - Produto</option>
+                <option @bind="Servico.Tipo" value="2">2 - Servico</option>
+            </select>
         </div>
     </section>
 

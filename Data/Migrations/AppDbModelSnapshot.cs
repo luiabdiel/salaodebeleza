@@ -245,7 +245,7 @@ namespace salaodebeleza.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Clientes", (string)null);
+                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("salaodebeleza.Models.Servico", b =>
@@ -266,12 +266,12 @@ namespace salaodebeleza.Data.Migrations
                     b.Property<double>("Quantidade")
                         .HasColumnType("double precision");
 
-                    b.Property<bool>("Tipo")
-                        .HasColumnType("boolean");
+                    b.Property<int>("Tipo")
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 
-                    b.ToTable("Servicos", (string)null);
+                    b.ToTable("Servicos");
                 });
 
             modelBuilder.Entity("salaodebeleza.Models.Venda", b =>
@@ -292,7 +292,7 @@ namespace salaodebeleza.Data.Migrations
 
                     b.HasIndex("ClienteID");
 
-                    b.ToTable("Vendas", (string)null);
+                    b.ToTable("Vendas");
                 });
 
             modelBuilder.Entity("salaodebeleza.Models.VendaItem", b =>
@@ -321,7 +321,7 @@ namespace salaodebeleza.Data.Migrations
 
                     b.HasIndex("VendaID");
 
-                    b.ToTable("VendasItens", (string)null);
+                    b.ToTable("VendasItens");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

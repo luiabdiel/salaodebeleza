@@ -1,5 +1,4 @@
-﻿using salaodebeleza.Models.CustomValidations.Vendas;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace salaodebeleza.Models;
@@ -24,6 +23,6 @@ public class Venda
 
     public double ValorTotal() =>
         Itens.Sum(item => item.ValorTotal());
-    //[QuantidadeItens]
+    
     public List<VendaItem> Itens { get; set; }
 }

@@ -14,7 +14,7 @@ public class Servico {
     public string Descricao { get; set; }
 
     [Required]
-    public bool Tipo { get; set; }
+    public int Tipo { get; set; }
 
     public double Quantidade { get; set; }
 

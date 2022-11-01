@@ -4,7 +4,7 @@
 
 namespace salaodebeleza.Data.Migrations
 {
-    public partial class newModel2 : Migration
+    public partial class NewModel1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,12 +22,12 @@ namespace salaodebeleza.Data.Migrations
                 nullable: false,
                 defaultValue: 0.0);
 
-            migrationBuilder.AddColumn<bool>(
+            migrationBuilder.AddColumn<int>(
                 name: "Tipo",
                 table: "Servicos",
-                type: "boolean",
+                type: "integer",
                 nullable: false,
-                defaultValue: false);
+                defaultValue: 0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
