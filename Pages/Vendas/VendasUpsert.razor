@@ -190,7 +190,7 @@ else
             }
 
             var produtoSelecionado = Servicos.Find(prod => prod.ID == ServicoIdAtual);
-            var item = new VendaItem(produtoSelecionado.Preco, ServicoIdAtual, produtoSelecionado);
+            var item = new VendaItem(produtoSelecionado.Preco,ServicoIdAtual, QuantidadeAtual, produtoSelecionado);
 
             Venda.Itens.Add(item);
 

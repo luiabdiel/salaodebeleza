@@ -11,12 +11,12 @@ namespace salaodebeleza.Models
         {
 
         }
-        public VendaItem(double preco, int produtoID, Servico servico)
+        public VendaItem(double preco, int servicoID, double quantidade, Servico servico)
         {
             Preco = preco;
-            ServicoID = produtoID;
+            ServicoID = servicoID;
             Servico = servico;
-
+            Quantidade = quantidade;
         }
 
         [Key]
@@ -30,12 +30,14 @@ namespace salaodebeleza.Models
         public int ServicoID { get; set; }
         public Servico Servico { get; set; }
 
-
         [ForeignKey("VendaID")]
         public int VendaID { get; set; }
         public Venda Venda { get; set; }
 
+        [Range(0.01, double.MaxValue)]
+        public double Quantidade { get; set; }
+
         public double ValorTotal() =>
-        Preco;
+        Preco * Quantidade;
     }
 }

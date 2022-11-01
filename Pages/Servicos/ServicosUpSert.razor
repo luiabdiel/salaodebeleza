@@ -28,6 +28,11 @@ else
             <input class="form-control input-preco" @bind="Servico.Preco" placeholder="Dígite o valor" />
             <ValidationMessage For="(() => Servico.Preco)" />
         </div>
+        <div class="form-check form-switch mx-1 col-6 mt-2">
+            <input class="form-check-input" id="flexSwitchCheckDefault" type="checkbox" @bind="Servico.Tipo" />
+            <ValidationMessage For="(() => Servico.Tipo)" />
+            <label class="form-check-label" for="flexSwitchCheckDefault">Produto</label>
+        </div>
     </section>
 
     <div class="mx-1 my-4">
@@ -46,8 +51,6 @@ else
 @code {
     [Parameter] public int ID { get; set; }
     public Servico Servico { get; set; }
-
-
 
     protected override async Task OnInitializedAsync() =>
         Servico = NovoServico() ? new() : await http.GetFromJsonAsync<Servico>($"{navigation.BaseUri}api/servicos/{ID}");

@@ -13,6 +13,10 @@ public class Servico {
     [Required]
     public string Descricao { get; set; }
 
-    public List<VendaItem> Itens { get; set; }
+    [Required]
+    public bool Tipo { get; set; }
 
+    public double Quantidade { get; set; }
+
+    public List<VendaItem> Itens { get; set; }
 }

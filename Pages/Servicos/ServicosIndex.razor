@@ -25,6 +25,11 @@ else
                     <img src="https://cdn-icons-png.flaticon.com/512/3220/3220315.png">
                     <div class="card-body">
                         <h2>@servico.Descricao</h2>
+                        @if(servico.Tipo == true) {
+                            <p>Produto</p>
+                        } else {
+                            <p>Serviço</p>
+                        }
                         <p class="card-text">Preco: <span class="text-price">@servico.Preco.Formatado()</span></p>
                         <a class="btn btn-editar" href="/servicos/edicao/@servico.ID">Editar</a>
                     </div>
@@ -40,6 +45,7 @@ else
     public int ID { get; set; }
     public double Preco { get; set; }
     public string Descricao { get; set; }
+    public bool Tipo { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
