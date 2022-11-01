@@ -24,6 +24,6 @@ public class Venda
 
     public double ValorTotal() =>
         Itens.Sum(item => item.ValorTotal());
-    [QuantidadeItens]
+    //[QuantidadeItens]
     public List<VendaItem> Itens { get; set; }
 }

@@ -57,5 +57,6 @@ else
         var url = $"{navigation.BaseUri}api/servicos/GetServicos";
         Servicoes = await http.GetFromJsonAsync<List<Servico>>(url);
     }
+    
 
 }
