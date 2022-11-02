@@ -28,17 +28,14 @@ else
             <input class="form-control input-preco" @bind="Servico.Preco" placeholder="Dígite o valor" />
             <ValidationMessage For="(() => Servico.Preco)" />
         </div>
-        <div class="form-check form-switch mx-1 col-6 mt-2">
-            <input class="form-check-input" id="flexSwitchCheckDefault" type="checkbox" @bind="Servico.Tipo" value="1" />
+        <div class="mx-1 col-6 mt-3">
+            <label class="form-label">Selecione o tipo:</label>
+            <select required class="form-select form-select-sm" @bind="Servico.Tipo">
+            <option value="1">Produto</option>
+            <option value="2">Servico</option>
             <ValidationMessage For="(() => Servico.Tipo)" />
-            <label class="form-check-label" for="flexSwitchCheckDefault">Produto</label>
-        </div>
-        <div class="form-check form-switch mx-1 col-6 mt-2">
-            <select>
-                <option @bind="Servico.Tipo" value="1">1 - Produto</option>
-                <option @bind="Servico.Tipo" value="2">2 - Servico</option>
-            </select>
-        </div>
+        </select>
+            </div>
     </section>
 
     <div class="mx-1 my-4">

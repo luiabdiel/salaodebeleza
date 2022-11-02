@@ -27,8 +27,11 @@ else
                         <h2>@servico.Descricao</h2>
                         @if(servico.Tipo == 1) {
                             <p>Produto</p>
-                        } else {
+                        }
+                        else if (servico.Tipo == 2) {
                             <p>Serviço</p>
+                        } else {
+                            <p>Vazio</p>
                         }
                         <p class="card-text">Preco: <span class="text-price">@servico.Preco.Formatado()</span></p>
                         <a class="btn btn-editar" href="/servicos/edicao/@servico.ID">Editar</a>
