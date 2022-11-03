@@ -80,9 +80,15 @@ else
                                 <td class="text-end">@item.Preco.Formatado()</td>
                                 <td class="text-end">@item.ValorTotal().Formatado()</td>
                                 <td class="text-end">
+
                                     <button type="button" @onclick="(() => RemoverServico(item))" class="btn btn-danger">Remover</button>
                                 </td>
                             </tr>
+                            <div class="mx-1 col-6">
+                                <label class="form-label">Novo Preço: @item.Servico.Descricao</label>
+                                <input class="form-control input-preco" @bind="item.Preco"/>
+                                <ValidationMessage For="(() => item.Preco)" />
+                            </div>
                         }
                     </tbody>
                 </table>
