@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using salaodebeleza.Models.CustomValidations.Vendas;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace salaodebeleza.Models;
@@ -7,6 +8,7 @@ public class Venda
     public Venda()
     {
         DataEmissao = DateTime.Now;
+        DataAgendamento = DateTime.Now;
         Itens = new();
     }
 
@@ -14,6 +16,8 @@ public class Venda
     public int ID { get; set; }
 
     public DateTime DataEmissao { get; set; }
+    public DateTime DataAgendamento { get; set; }
+    public int Status { get; set; }
 
     [Range(1, int.MaxValue)]
     [ForeignKey("ClienteID")]
@@ -23,6 +27,6 @@ public class Venda
 
     public double ValorTotal() =>
         Itens.Sum(item => item.ValorTotal());
-    
+    [QuantidadeItens]
     public List<VendaItem> Itens { get; set; }
 }

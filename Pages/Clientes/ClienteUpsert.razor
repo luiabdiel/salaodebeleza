@@ -89,7 +89,7 @@ else
 
             if (!result.IsSuccessStatusCode)
             {
-                throw new Exception(result.ReasonPhrase);
+                throw new Exception("Este Cliente está associado a uma Venda!");
             }
 
             navigation.NavigateTo("/clientes");

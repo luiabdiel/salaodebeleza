@@ -15,8 +15,8 @@ namespace salaodebeleza.Models
         {
             Preco = preco;
             ServicoID = servicoID;
-            Servico = servico;
             Quantidade = quantidade;
+            Servico = servico;
         }
 
         [Key]

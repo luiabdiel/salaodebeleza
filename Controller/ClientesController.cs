@@ -61,10 +61,22 @@ namespace salaodebeleza.Controller
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCliente(int id, Cliente cliente)
         {
+            if (ClienteExistsCpf(cliente.CPF))
+            {
+                return NotFound();
+            }
+            else
+            {
+                _context.Clientes.Add(cliente);
+                await _context.SaveChangesAsync();
+                return CreatedAtAction("GetCliente", new { id = cliente.ID }, cliente);
+            }
+        
             if (id != cliente.ID)
             {
                 return BadRequest();
             }
+
 
             _context.Entry(cliente).State = EntityState.Modified;
 

@@ -1,6 +1,8 @@
 ﻿@page "/vendas"
 @inject HttpClient http
 @inject NavigationManager navigation
+@inject IJSRuntime js
+
 
 <header>
     <h1 class="title">Vendas</h1>
@@ -18,8 +20,11 @@ else {
         <thead>
             <th>ID</th>
             <th>Cliente</th>
+            <th>Data de Agendamento</th>
             <th>Data de Emissão</th>
             <th>Valor Total</th>
+            <th>Status</th>
+
         </thead>
 
         <tbody>
@@ -31,9 +36,22 @@ else {
                         </a>
                     </td>
                     <td>@venda.Cliente.Nome</td>
-                    <td>@venda.DataEmissao.ToShortDateString()</td>
+                    <td>@venda.DataAgendamento</td>
+                    <td>@venda.DataEmissao</td>
                     <td>@venda.ValorTotal().Formatado()</td>
+                    <td>@if(@venda.Status == 1){
+                            <span>Agendado</span>
+                        }
+                        else if (@venda.Status == 2){
+                            <span>Em andamento</span>
+                        }
+                        else if (@venda.Status == 3){
+                            <span>Finzalizado</span>
+                        }
+                        
+                        </td>
                 </tr>
+                <a href="/vendas/edicao/@venda.ID" class="link-info btn">A</a>
             }
         </tbody>
     </table>
@@ -45,6 +63,8 @@ else {
 
 @code {
     public List<Venda> Vendas { get; set; }
+    [Parameter]public int ID { get; set; }
+    public Venda Venda { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -56,4 +76,7 @@ else {
         var url = $"{navigation.BaseUri}api/vendas/GetVendas";
         Vendas = await http.GetFromJsonAsync<List<Venda>>(url);
     }
+    
+    
 }
+

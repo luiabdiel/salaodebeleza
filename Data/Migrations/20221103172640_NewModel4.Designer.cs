@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using salaodebeleza.Data;
@@ -11,9 +12,10 @@ using salaodebeleza.Data;
 namespace salaodebeleza.Data.Migrations
 {
     [DbContext(typeof(AppDb))]
-    partial class AppDbModelSnapshot : ModelSnapshot
+    [Migration("20221103172640_NewModel4")]
+    partial class NewModel4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -245,7 +247,7 @@ namespace salaodebeleza.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Clientes", (string)null);
+                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("salaodebeleza.Models.Servico", b =>
@@ -271,7 +273,7 @@ namespace salaodebeleza.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Servicos", (string)null);
+                    b.ToTable("Servicos");
                 });
 
             modelBuilder.Entity("salaodebeleza.Models.Venda", b =>
@@ -291,14 +293,11 @@ namespace salaodebeleza.Data.Migrations
                     b.Property<DateTime>("DataEmissao")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("integer");
-
                     b.HasKey("ID");
 
                     b.HasIndex("ClienteID");
 
-                    b.ToTable("Vendas", (string)null);
+                    b.ToTable("Vendas");
                 });
 
             modelBuilder.Entity("salaodebeleza.Models.VendaItem", b =>
@@ -327,7 +326,7 @@ namespace salaodebeleza.Data.Migrations
 
                     b.HasIndex("VendaID");
 
-                    b.ToTable("VendasItens", (string)null);
+                    b.ToTable("VendasItens");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

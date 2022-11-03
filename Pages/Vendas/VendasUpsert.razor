@@ -30,7 +30,11 @@ else
             </div>
 
             <div class="mx-1 col-2">
-                <label class="form-label">Data de Emissão</label>
+                <label class="form-label">Data do Agendamento</label>
+                <input type="datetime-local" @bind="Venda.DataAgendamento" class="form-control" />
+            </div>
+            <div class="mx-1 col-2">
+                <label class="form-label">Data da Emissão</label>
                 <input type="date" @bind="Venda.DataEmissao" class="form-control" />
             </div>
         </section>
@@ -42,9 +46,10 @@ else
                 <div class="mx-1 col-6">
                     <label class="form-label">Servico</label>
                     <select @bind="ServicoIdAtual" class="form-select">
-                        @foreach (var produto in Servicos.Where(prod => !Venda.Itens.Select(item => item.ServicoID).Contains(prod.ID)))
+                        <option value="0">Selecione Um Produto ou Servico</option>
+                        @foreach (var servico in Servicos.Where(prod => !Venda.Itens.Select(item => item.ServicoID).Contains(prod.ID)))
                         {
-                            <option value="@produto.ID">@produto.Descricao - @produto.Preco.Formatado()</option>
+                            <option value="@servico.ID">@servico.Descricao - @servico.Preco.Formatado()</option>
                         }
                     </select>
                 </div>
@@ -56,6 +61,15 @@ else
 
                 <div>
                     <button type="button" @onclick="AdicionarServico" class="btn btn-success">Adicionar</button>
+                </div>
+                <div class="mx-1 col-6 mt-3">
+                    <label class="form-label">Selecione o tipo:</label>
+                    <select required class="form-select form-select-sm" @bind="Venda.Status">
+                        <option value="1">Agendado</option>
+                        <option value="2">Em Andamento</option>
+                        <option value="3">Finalizado</option>
+                        <ValidationMessage For="(() => Venda.Status)" />
+                    </select>
                 </div>
             </div>
 
@@ -70,7 +84,6 @@ else
                     <th class="text-start">Servico</th>
                     <th class="text-end">Preço</th>
                     <th class="text-end">Valor Total</th>
-                    <th class="text-end"></th>
                     </thead>
                     <tbody>
                         @foreach (var item in Venda.Itens)
@@ -90,8 +103,10 @@ else
                                 <ValidationMessage For="(() => item.Preco)" />
                             </div>
                         }
+                        
                     </tbody>
                 </table>
+               
 
                 <div>
                     <span class="d-block fw-bold text-end">Total de @Venda.Itens.Sum(x => x.ValorTotal()).Formatado()</span>
@@ -102,13 +117,16 @@ else
         <div class="mx-1 my-4">
             <button class="btn btn-success">Salvar</button>
             <a href="/vendas" class="btn btn-primary">Listagem</a>
+            @if(!NovaVenda()){
+                <button type="button" @onclick="Apagar" class="btn btn-danger">Apagar Venda</button>
+            }
         </div>
     </EditForm>
 }
 
 @code {
     [Parameter] public int ID { get; set; }
-   
+
     public Venda Venda { get; set; }
     public List<Cliente> Clientes { get; set; }
 
@@ -124,7 +142,7 @@ else
         }
         catch (Exception ex)
         {
-            
+
             throw ex;
         }
 
@@ -135,7 +153,7 @@ else
         }
         catch (Exception ex)
         {
-            
+
             throw ex;
         }
         try
@@ -145,7 +163,7 @@ else
         }
         catch (Exception ex)
         {
-            
+
             throw ex;
         }
     }
@@ -162,6 +180,7 @@ else
                 {
                     throw new Exception(result.ReasonPhrase);
                 }
+                navigation.NavigateTo("/vendas");
             }
             else
             {
@@ -172,8 +191,8 @@ else
                     throw new Exception(result.ReasonPhrase);
                 }
             }
-
             navigation.NavigateTo("/vendas");
+
         }
         catch (Exception ex)
         {
@@ -185,7 +204,8 @@ else
     {
         try
         {
-
+            if (ServicoIdAtual == 0) throw new Exception("Selecione o produto/serviço");
+            
             if (QuantidadeAtual == 0)
             {
                 throw new Exception("Quantidade deve ser informada.");
@@ -217,5 +237,26 @@ else
 
     bool Carregando() =>
         Venda is null || Clientes is null || Servicos is null;
+
+    async Task Apagar()
+    {
+        try
+        {
+            var result = await http.DeleteAsync($"{navigation.BaseUri}api/vendas/{Venda.ID}");
+
+            if (!result.IsSuccessStatusCode)
+            {
+                throw new Exception(result.ReasonPhrase);
+            }
+            navigation.NavigateTo("/vendas");
+
+
+        }
+        catch (Exception ex)
+        {
+            await js.InvokeVoidAsync("alert", ex.Message);
+        }
+    }
+
 }
 

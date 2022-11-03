@@ -57,7 +57,7 @@ else
 
     protected override async Task OnInitializedAsync() =>
         Servico = NovoServico() ? new() : await http.GetFromJsonAsync<Servico>($"{navigation.BaseUri}api/servicos/{ID}");
-        
+      
     async Task Valid()
     {
         try
@@ -91,7 +91,7 @@ else
 
             if (!result.IsSuccessStatusCode)
             {
-                throw new Exception(result.ReasonPhrase);
+                throw new Exception("Este Produto está associado a uma Venda!");
             }
 
             navigation.NavigateTo("/servicos");
@@ -102,8 +102,18 @@ else
         }
     }
 
-    string Cabecalho() =>
-        NovoServico() ? "Novo Serviço" : $"{Servico.Descricao}";
+    string Cabecalho(){
+        
+        
+        if (NovoServico()){
+            return "Novo Serviço"; 
+        }else if (Servico.Tipo == 1){
+            return $"Produto - {Servico.Descricao}";
+        }else {
+            return $"Servico - {Servico.Descricao}";
+        }
+        
+    }
 
     bool NovoServico() => ID == 0;
 
