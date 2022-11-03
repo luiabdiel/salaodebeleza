@@ -1,8 +1,9 @@
 ﻿.btn {
-    padding: 0.4rem 1rem;
+    padding: 0.6rem 1rem;
     border-radius: 4px;
     background-color: blue;
     color: white;
+    font-size: 1.125rem
 }
 
 .btn-salvar {

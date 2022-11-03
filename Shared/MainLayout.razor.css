@@ -2,18 +2,22 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 main {
     flex: 1;
+    background-color: #f5f5f5;
+    padding-top: 1.2rem;
 }
 
 .sidebar {
-    background: #391b4a;
+    background: #062C30;
 }
 
 .top-row {
-    background-color: #f7f7f7;
+    background-color: #062C30;
     border-bottom: 1px solid #d6d5d5;
     justify-content: flex-end;
     height: 3.5rem;

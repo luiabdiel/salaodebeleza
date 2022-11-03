@@ -80,7 +80,7 @@ else
                                 <td class="text-end">@item.Preco.Formatado()</td>
                                 <td class="text-end">@item.ValorTotal().Formatado()</td>
                                 <td class="text-end">
-                                    <button type="button" @onclick="(() => RemoverServico(item))" class="btn btn-danger">Remover</button>
+                                    <button type="button" @onclick="(() => RemoverServico(item))" class="btn btn-danger">Remover <i class="fa-solid fa-trash-can"></i></button>
                                 </td>
                             </tr>
                         }
