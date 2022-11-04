@@ -51,29 +51,24 @@ namespace salaodebeleza.Controller {
             return venda;
         }
 
-        // PUT: api/Vendas/5
+        // PUT: api/Vendas/5 atualizaçao
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutVenda(int id, Venda venda)
         {
-            if (HoraExists(venda.DataAgendamento))
-            {
+            if (HoraExists(venda.DataAgendamento, venda.ID) || venda.DataAgendamento < venda.DataEmissao) {
                 return NotFound();
             }
-            else
-            {
-                if (id != venda.ID)
-                {
+            else {
+                if (id != venda.ID) {
                     return BadRequest();
                 }
 
                 _context.Update(venda);
 
                 //Determinando como Adicionado os itens de ID = 0
-                foreach (var item in venda.Itens)
-                {
-                    if (item.ID == 0)
-                    {
+                foreach (var item in venda.Itens) {
+                    if (item.ID == 0) {
                         _context.Entry(item).State = EntityState.Added;
                     }
                 }
@@ -105,16 +100,17 @@ namespace salaodebeleza.Controller {
         [HttpPost]
         public async Task<ActionResult<Venda>> PostVenda(Venda venda)
         {
-            if (HoraExists(venda.DataAgendamento))
-            {
+            var Hora = venda.DataAgendamento.AddMinutes(30);
+            if (HoraExists(venda.DataAgendamento, venda.ID) || venda.DataAgendamento < venda.DataEmissao) {
+                return BadRequest();
+            }
+            var TemHorario = _context.Vendas.Any(x => x.DataAgendamento >= venda.DataAgendamento.AddMinutes(-30) && x.DataAgendamento <= venda.DataAgendamento.AddMinutes(30));
+            if (TemHorario) {
                 return NotFound();
             }
-            else
-            {
-                try
-                {
-                    foreach (var item in venda.Itens)
-                    {
+            else {
+                try {
+                    foreach (var item in venda.Itens) {
                         item.Servico = null;
                     }
 
@@ -123,8 +119,7 @@ namespace salaodebeleza.Controller {
 
                     return CreatedAtAction("GetVenda", new { id = venda.ID }, venda);
                 }
-                catch (Exception ex)
-                {
+                catch (Exception ex) {
                     throw ex;
                 }
             }
@@ -150,9 +145,12 @@ namespace salaodebeleza.Controller {
         {
             return _context.Vendas.Any(e => e.ID == id);
         }
-        private bool HoraExists(DateTime dataAgendamento)
+        private bool HoraExists(DateTime dataAgendamento, int id)
         {
-            return _context.Vendas.Any(e => e.DataAgendamento == dataAgendamento);
+            if (!VendaExists(id)) {
+                return _context.Vendas.Any(e => e.DataAgendamento == dataAgendamento);
+            }
+            return false;
         }
     }
 }

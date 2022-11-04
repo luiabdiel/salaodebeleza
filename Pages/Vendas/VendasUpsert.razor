@@ -103,25 +103,20 @@ else
                                     <button type="button" @onclick="(() => RemoverServico(item))" class="btn btn-apagar"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
-                            @*<div>
-                                <label class="form-label">Novo Preço: @item.Servico.Descricao</label>
-                                <input class="form-control input-preco" @bind="item.Preco"/>
-                                <ValidationMessage For="(() => item.Preco)" />
-                             </div>*@
                         }
                     </tbody>
                 </table>
-                <div class="footer-table">
-                    <div class="btn-vendas-group">
-                        <button class="btn">Salvar</button>
-                        <a href="/vendas" class="btn btn-listagem">Listagem</a>
-                        @if (!NovaVenda()) {
-                            <button type="button" @onclick="Apagar" class="btn btn-apagar"><i class="fa-solid fa-trash"></i></button>
-                        }
-                    </div>
-                    <span class="text-vendastotal">Total de <span class="preco-total">@Venda.Itens.Sum(x => x.ValorTotal()).Formatado()</span></span>
-                </div>
             }
+            <div class="footer-table">
+                <div class="btn-vendas-group">
+                    <button class="btn">Salvar</button>
+                    <a href="/vendas" class="btn btn-listagem">Listagem</a>
+                    @if (!NovaVenda()) {
+                        <button type="button" @onclick="Apagar" class="btn btn-apagar"><i class="fa-solid fa-trash"></i></button>
+                    }
+                </div>
+                <span class="text-vendastotal text-end">Total de <span class="preco-total">@Venda.Itens.Sum(x => x.ValorTotal()).Formatado()</span></span>
+            </div>
         </section>
     </EditForm>
 }
