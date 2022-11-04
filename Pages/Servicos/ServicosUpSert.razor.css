@@ -6,3 +6,34 @@ input::-webkit-outer-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+.btn {
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    background-color: #05595B;
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 500;
+    text-align: center;
+    border: none; 
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-servicos-group {
+    display: flex; 
+    align-items: center;
+    gap: .5rem;
+    margin-top: 1rem;
+
+}
+
+.btn-listagem {
+    background-color: #24282C;
+}
+
+.btn-apagar {
+    background-color: #ba3636;
+}

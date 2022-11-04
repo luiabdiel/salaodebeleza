@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <None Remove="Pages\VendasUpsert.css" />
-    <None Remove="Pages\Vendas\VendasUpsert.razor.css" />
   </ItemGroup>
 
   <ItemGroup>

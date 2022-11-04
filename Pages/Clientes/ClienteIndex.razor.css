@@ -4,26 +4,61 @@
     justify-content: space-between;
 }
 
-.btn-adicionar {
-    background: #0000FF;
-    color: #fff;
-    font-size: 1.125rem;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    text-decoration: none;
-    cursor: pointer;
+.title {
+    color: #062C30;
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 700;
 }
 
-.btn-adicionar:hover {
-    background: #000080;
-    transition: background .1s;
+.btn {
+    padding: 0.4rem .75rem;
+    border-radius: 4px;
+    background-color: #05595B;
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 500;
+    text-align: center;
+    border: none;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-group-client {
+    display: flex;
+    gap: 0.3rem;
+    border-radius: 4px;
+}
+
+.btn-adicionar {
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    background-color: #05595B;
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 500;
+    text-align: center;
+    border: none;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.btn-pesquisar {
+    background-color: #3eb531;
+}
+
+.btn-resetar {
+    background-color: #f2b93f;
 }
 
 .form-container {
     display: flex;
     gap: 1rem;
-
     padding-bottom: 2rem;
+    align-items: end;
 }
 
 .form {
@@ -72,4 +107,12 @@ tr:hover {
 
 td {
     border-top: 4px solid #f5f5f5;
+}
+
+.td-id {
+    font-weight: 700;
+}
+
+.gear {
+    color: #062C30;
 }

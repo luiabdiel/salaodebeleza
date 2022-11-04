@@ -5,8 +5,8 @@
 
 
 <div class="header">
-    <h3>Nossos Serviços</h3>
-        <a class="btn btn-adicionar" href="/servicos/adicao">Adicionar</a>
+    <h1 class="title">Serviços e Produtos</h1>
+        <a class="btn btn-adicionar" href="/servicos/adicao">Adicionar<i class="fa-solid fa-plus"></i></a>
 </div>
 @if (Servicoes is null)
 {
@@ -26,15 +26,15 @@ else
                     <div class="card-body">
                         <h2>@servico.Descricao</h2>
                         @if(servico.Tipo == 1) {
-                            <p>Produto</p>
+                            <p class="tipo-produto">Produto</p>
                         }
                         else if (servico.Tipo == 2) {
-                            <p>Serviço</p>
+                            <p class="tipo-servico">Serviço</p>
                         } else {
                             <p>Vazio</p>
                         }
-                        <p class="card-text">Preco: <span class="text-price">@servico.Preco.Formatado()</span></p>
-                        <a class="btn btn-editar" href="/servicos/edicao/@servico.ID">Editar</a>
+                        <p class="card-text">Preço: <span class="text-price">@servico.Preco.Formatado()</span></p>
+                        <a class="btn btn-editar" href="/servicos/edicao/@servico.ID">Editar<i class="fa-solid fa-gear gear"></i></a>
                     </div>
                 </div>
             </div>
@@ -60,6 +60,4 @@ else
         var url = $"{navigation.BaseUri}api/servicos/GetServicos";
         Servicoes = await http.GetFromJsonAsync<List<Servico>>(url);
     }
-    
-
 }

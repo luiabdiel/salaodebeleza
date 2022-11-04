@@ -20,7 +20,12 @@
     font-weight: 500;
     display: flex;
     align-items: center;
-    gap: .4rem;
+    gap: .5rem;
+    border: none;
+}
+
+.btn:hover {
+    opacity: 0.9;
 }
 
 table {
@@ -49,6 +54,10 @@ td {
     border-top: 4px solid #f5f5f5;
 }
 
+.td-id {
+    font-weight: 700;
+}
+
 tr:hover {
     background-color: #eeeeee;
 }
@@ -63,6 +72,18 @@ tr:hover {
     color: red;
 }
 
-i {
-    font-size: .8rem;
+.gear {
+    color: #062C30;
+}
+
+.agendamento {
+    color: green;
+}
+
+.andamento {
+    color: yellow;
+}
+
+.finalizado {
+    color: red;
 }

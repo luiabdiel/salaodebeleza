@@ -6,6 +6,12 @@
     margin-bottom: 2rem;
 }
 
+.title {
+    color: #062C30;
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 700;
+}
+
 .card {
     display: flex;
     align-items: center;
@@ -18,20 +24,24 @@ img {
 }
 
 .btn {
-    font-size: 1.125rem;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1rem;
     border-radius: 4px;
-    text-decoration: none;
-    cursor: pointer;
+    background-color: #05595B;
     color: white;
+    font-size: 1.125rem;
+    font-weight: 500;
+    text-align: center;
+    border: none;
+}
+
+.btn:hover {
+    opacity: 0.9;
 }
 
 .btn-adicionar {
-    background-color: #28a745;
-}
-
-.btn-adicionar:hover {
-    background-color: #22943d;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
 }
 
 .btn-reservar {
@@ -42,19 +52,34 @@ img {
     background-color: #0353a8;
 }
 
-.btn-editar {
-    background-color: #6c757d;
-}
-
-.btn-editar:hover {
-    background-color: #4f565c;
-}
-
 .card-text {
     font-size: 1.2rem;
-    color: #6c757d;
+    color: #062C30;
+    font-weight: 700;
 }
 
 .text-price {
     color: red;
+    font-weight: 400;
+}
+
+.tipo-produto {
+    background: #DC9754;
+    color: #F6ECE1;
+    font-weight: 500;
+}
+
+.tipo-servico {
+    background-color: #F4694D;
+    color: #E9EFF2;
+    font-weight: 500;
+}
+
+.card {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+
+.gear {
+    margin-left: 0.5rem;
+    color: #F5F5F5;
 }

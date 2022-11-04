@@ -40,8 +40,6 @@ else
         </section>
 
         <section class="my-4">
-            <h6 class="w-100 fw-bold">Servicos</h6>
-
             <div class="d-flex flex-wrap form-vendas align-items-end">
                 <div class="mx-1 col-6">
                     <label class="form-label">Servico</label>
@@ -60,7 +58,7 @@ else
                 </div>
 
                 <div>
-                    <button type="button" @onclick="AdicionarServico" class="btn btn-success">Adicionar</button>
+                    <button type="button" @onclick="AdicionarServico" class="btn btn-adicionar">Adicionar <i class="fa-solid fa-plus"></i></button>
                 </div>
                 <div class="mx-1 col-6 mt-3">
                     <label class="form-label">Selecione o tipo:</label>
@@ -79,46 +77,43 @@ else
             }
             else
             {
-                <table class="table mt-2">
+                <table>
                     <thead>
-                    <th class="text-start">Servico</th>
-                    <th class="text-end">Preço</th>
-                    <th class="text-end">Valor Total</th>
+                    <th>Servico</th>
+                    <th>Preço</th>
+                    <th>Valor Total</th>
+                    <th></th>
                     </thead>
                     <tbody>
                         @foreach (var item in Venda.Itens)
                         {
                             <tr>
-                                <td class="text-start">@item.Servico.Descricao</td>
-                                <td class="text-end">@item.Preco.Formatado()</td>
-                                <td class="text-end">@item.ValorTotal().Formatado()</td>
+                                <td>@item.Servico.Descricao</td>
+                                <td><input class="form-control input-preco" @bind="item.Preco" /></td>
+                                <td>@item.ValorTotal().Formatado()</td>
                                 <td class="text-end">
-
-                                    <button type="button" @onclick="(() => RemoverServico(item))" class="btn btn-danger">Remover</button>
+                                    <button type="button" @onclick="(() => RemoverServico(item))" class="btn btn-apagar"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
-                            <div class="mx-1 col-6">
+                            @*<div>
                                 <label class="form-label">Novo Preço: @item.Servico.Descricao</label>
                                 <input class="form-control input-preco" @bind="item.Preco"/>
                                 <ValidationMessage For="(() => item.Preco)" />
-                            </div>
+                             </div>*@
                         }
-                        
                     </tbody>
                 </table>
-               
-
                 <div>
                     <span class="d-block fw-bold text-end">Total de @Venda.Itens.Sum(x => x.ValorTotal()).Formatado()</span>
                 </div>
             }
         </section>
 
-        <div class="mx-1 my-4">
-            <button class="btn btn-success">Salvar</button>
-            <a href="/vendas" class="btn btn-primary">Listagem</a>
+        <div class="btn-vendas-group">
+            <button class="btn">Salvar</button>
+            <a href="/vendas" class="btn btn-listagem">Listagem</a>
             @if(!NovaVenda()){
-                <button type="button" @onclick="Apagar" class="btn btn-danger">Apagar Venda</button>
+                <button type="button" @onclick="Apagar" class="btn btn-apagar"><i class="fa-solid fa-trash"></i></button>
             }
         </div>
     </EditForm>

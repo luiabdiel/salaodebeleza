@@ -3,7 +3,6 @@
 @inject NavigationManager navigation
 @inject IJSRuntime js
 
-
 <header>
     <h1 class="title">Vendas</h1>
     <a class="btn" href="/vendas/adicao">Adicionar <i class="fa-solid fa-plus"></i></a>
@@ -24,34 +23,31 @@ else {
             <th>Data de Emissão</th>
             <th>Valor Total</th>
             <th>Status</th>
+            <th></th>
 
         </thead>
 
         <tbody>
             @foreach (var venda in Vendas) {
                 <tr>
-                    <td>
-                        <a href="/vendas/edicao/@venda.ID" class="link-info">
-                            @venda.ID
-                        </a>
-                    </td>
+                    <td class="td-id">@venda.ID</td>
                     <td>@venda.Cliente.Nome</td>
                     <td>@venda.DataAgendamento</td>
                     <td>@venda.DataEmissao</td>
                     <td>@venda.ValorTotal().Formatado()</td>
                     <td>@if(@venda.Status == 1){
-                            <span>Agendado</span>
+                            <span class="agendamento"><i class="fa-sharp fa-solid fa-circle"></i></span>
                         }
                         else if (@venda.Status == 2){
-                            <span>Em andamento</span>
+                            <span class="andamento"><i class="fa-sharp fa-solid fa-circle"></i></span>
                         }
                         else if (@venda.Status == 3){
-                            <span>Finzalizado</span>
+                            <span class="finalizado"><i class="fa-sharp fa-solid fa-circle"></i></span>
                         }
                         
                         </td>
+                    <td><a href="/vendas/edicao/@venda.ID" class="link-info"><i class="fa-solid fa-gear gear"></i></a></td>
                 </tr>
-                <a href="/vendas/edicao/@venda.ID" class="link-info btn">A</a>
             }
         </tbody>
     </table>

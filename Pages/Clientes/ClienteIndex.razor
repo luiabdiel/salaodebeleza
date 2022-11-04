@@ -3,37 +3,36 @@
 @inject NavigationManager navigation
 
 <div class="header">
-    <h1>Clientes</h1>
-    <a class="btn-adicionar" href="/clientes/adicao">Adicionar</a>
+    <h1 class="title">Clientes</h1>
+    <a class="btn-adicionar" href="/clientes/adicao">Adicionar<i class="fa-solid fa-plus"></i></a>
 </div>
 
 <div class="form-container">
     <div class="form form-id">
-        <label>ID</label>
-        <input class="input-id" @bind="ID" />
+        <label class="form-label">ID</label>
+        <input class="input-id form-control" @bind="ID" />
     </div>
 
     <div class="form form-descricao">
-        <label>Descrição</label>
-        <input @bind="Info" />
+        <label class="form-label">Descrição</label>
+        <input class="input-id form-control" @bind="Info" />
     </div>
 
     <div class="form">
-        <label title="Data de Nascimento Inicial">Data Nasc. Inicial</label>
-        <input @bind="DataNascimentoInicial" type="date" />
+        <label class="form-label" title="Data de Nascimento Inicial">Data Nasc. Inicial</label>
+        <input class="input-id form-control" @bind="DataNascimentoInicial" type="date" />
     </div>
 
     <div class="form">
-        <label title="Data de Nascimento Final">Data Nasc. Final</label>
-        <input @bind="DataNascimentoFinal" type="date" />
+        <label class="form-label" title="Data de Nascimento Final">Data Nasc. Final</label>
+        <input class="input-id form-control" @bind="DataNascimentoFinal" type="date" />
         
     </div>
    
-    <div>
-        <button type="button" @onclick="Pesquisar" class="btn btn-primary mt-3">Pesquisar</button>
-        <button type="button" @onclick="ReturnInitialized" class="btn btn-primary mt-3">Resetar</button>
+    <div class="btn-group-client">
+        <button type="button" @onclick="Pesquisar" class="btn btn-pesquisar"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
+        <button type="button" @onclick="ReturnInitialized" class="btn btn-resetar"><i class="fa-sharp fa-solid fa-arrow-rotate-left"></i></button>
     </div>
-
 </div>
 
 @if (Clientes is null) {
@@ -49,19 +48,17 @@ else {
             <th>Nome</th>
             <th>CPF</th>
             <th>Data de Nascimento</th>
+            <th></th>
         </thead>
 
         <tbody>
             @foreach (var cliente in Clientes) {
                 <tr>
-                    <td>
-                        <a href="/clientes/edicao/@cliente.ID" class="link-info">
-                            @cliente.ID
-                        </a>
-                    </td>
+                    <td class="td-id">@cliente.ID</td>
                     <td>@cliente.Nome</td>
                     <td>@cliente.CPF</td>
                     <td>@cliente.DataNascimento.ToShortDateString()</td>
+                    <td><a href="/clientes/edicao/@cliente.ID" class="link-info"><i class="fa-solid fa-gear gear"></i></a></td>
                 </tr>
             }
         </tbody>

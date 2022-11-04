@@ -38,13 +38,13 @@ else
             </div>
     </section>
 
-    <div class="mx-1 my-4">
+    <div class="btn-servicos-group">
         <button class="btn btn-salvar btn-success">Salvar</button>
             <a href="/servicos" class="btn btn-listagem btn-primary">Listagem</a>
 
         @if (!NovoServico())
         {
-                <button type="button" @onclick="Apagar" class="btn btn btn-danger mx-1">Apagar</button>
+                <button type="button" @onclick="Apagar" class="btn btn-apagar"><i class="fa-solid fa-trash"></i></button>
         }
     </div>
 </EditForm>

@@ -36,13 +36,13 @@ else
             </div>
         </section>
 
-        <div class="mx-1 my-4">
+        <div class="btn-client-group">
             <button class="btn btn-salvar" >Salvar</button>
             <a href="/clientes" class="btn btn-listagem">Listagem</a>
 
             @if (!NovoCliente())
             {
-                <button type="button" @onclick="Apagar" class="btn mx-1">Apagar</button>
+                <button type="button" @onclick="Apagar" class="btn btn-apagar"><i class="fa-solid fa-trash"></i></button>
             }
         </div>
     </EditForm>
