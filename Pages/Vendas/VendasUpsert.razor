@@ -45,10 +45,18 @@ else
                     <label class="form-label">Servico</label>
                     <select @bind="ServicoIdAtual" class="form-select">
                         <option value="0">Selecione Um Produto ou Servico</option>
-                        @foreach (var servico in Servicos.Where(prod => !Venda.Itens.Select(item => item.ServicoID).Contains(prod.ID)))
+                            <optgroup label="Produto">
+                        @foreach (var servico in Servicos.Where(prod => !Venda.Itens.Select(item => item.ServicoID).Contains(prod.ID)).Where(prod => prod.Tipo == 1))
                         {
                             <option value="@servico.ID">@servico.Descricao - @servico.Preco.Formatado()</option>
                         }
+                            </optgroup>
+                            <optgroup label="Servico">
+                        @foreach (var servico in Servicos.Where(prod => !Venda.Itens.Select(item => item.ServicoID).Contains(prod.ID)).Where(prod => prod.Tipo == 2))
+                        {
+                            <option value="@servico.ID">@servico.Descricao - @servico.Preco.Formatado()</option>
+                        }
+                            </optgroup>
                     </select>
                 </div>
 
