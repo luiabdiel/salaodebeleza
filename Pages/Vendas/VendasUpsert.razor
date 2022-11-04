@@ -73,7 +73,7 @@ else
 
             @if (!Venda.Itens.Any())
             {
-                <p>Não há itens lançados nesta venda.</p>
+                <p class="sem-itens">Não há itens lançados nesta venda.</p>
             }
             else
             {
@@ -103,19 +103,18 @@ else
                         }
                     </tbody>
                 </table>
-                <div>
-                    <span class="d-block fw-bold text-end">Total de @Venda.Itens.Sum(x => x.ValorTotal()).Formatado()</span>
+                <div class="footer-table">
+                    <div class="btn-vendas-group">
+                        <button class="btn">Salvar</button>
+                        <a href="/vendas" class="btn btn-listagem">Listagem</a>
+                        @if (!NovaVenda()) {
+                            <button type="button" @onclick="Apagar" class="btn btn-apagar"><i class="fa-solid fa-trash"></i></button>
+                        }
+                    </div>
+                    <span class="text-vendastotal">Total de <span class="preco-total">@Venda.Itens.Sum(x => x.ValorTotal()).Formatado()</span></span>
                 </div>
             }
         </section>
-
-        <div class="btn-vendas-group">
-            <button class="btn">Salvar</button>
-            <a href="/vendas" class="btn btn-listagem">Listagem</a>
-            @if(!NovaVenda()){
-                <button type="button" @onclick="Apagar" class="btn btn-apagar"><i class="fa-solid fa-trash"></i></button>
-            }
-        </div>
     </EditForm>
 }
 

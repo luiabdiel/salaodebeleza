@@ -10,6 +10,16 @@
     font-weight: 700;
 }
 
+.total-registro {
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 500;
+    font-size: 1.3rem;
+}
+
+.quantidade-servicos {
+    color: red;
+}
+
 .btn {
     padding: 0.4rem .75rem;
     border-radius: 4px;
@@ -47,11 +57,11 @@
 }
 
 .btn-pesquisar {
-    background-color: #3eb531;
+    background-color: green;
 }
 
 .btn-resetar {
-    background-color: #f2b93f;
+    background-color: #DC9754;
 }
 
 .form-container {
@@ -111,6 +121,7 @@ td {
 
 .td-id {
     font-weight: 700;
+    color: #F4694D;
 }
 
 .gear {

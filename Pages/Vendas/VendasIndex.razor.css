@@ -56,6 +56,7 @@ td {
 
 .td-id {
     font-weight: 700;
+    color: #F4694D;
 }
 
 tr:hover {
@@ -74,6 +75,10 @@ tr:hover {
 
 .gear {
     color: #062C30;
+}
+
+.icon-status {
+    font-size: .75rem;
 }
 
 .agendamento {

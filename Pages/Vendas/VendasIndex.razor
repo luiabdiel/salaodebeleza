@@ -36,13 +36,13 @@ else {
                     <td>@venda.DataEmissao</td>
                     <td>@venda.ValorTotal().Formatado()</td>
                     <td>@if(@venda.Status == 1){
-                            <span class="agendamento"><i class="fa-sharp fa-solid fa-circle"></i></span>
+                            <span class="agendamento"><i class="fa-sharp fa-solid fa-circle icon-status" title="Serviço Agendado"></i></span>
                         }
                         else if (@venda.Status == 2){
-                            <span class="andamento"><i class="fa-sharp fa-solid fa-circle"></i></span>
+                            <span class="andamento"><i class="fa-sharp fa-solid fa-circle icon-status" title="Serviço em Andamento"></i></span>
                         }
                         else if (@venda.Status == 3){
-                            <span class="finalizado"><i class="fa-sharp fa-solid fa-circle"></i></span>
+                            <span class="finalizado"><i class="fa-sharp fa-solid fa-circle icon-status" title="Serviço Finalizado"></i></span>
                         }
                         
                         </td>
