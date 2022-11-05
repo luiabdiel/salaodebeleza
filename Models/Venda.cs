@@ -24,6 +24,9 @@ public class Venda
 
     public Cliente Cliente { get; set; }
 
+    [Required]
+    public int TempoEstimado { get; set; }
+
     public double ValorTotal() =>
         Itens.Sum(item => item.ValorTotal());
     public List<VendaItem> Itens { get; set; }

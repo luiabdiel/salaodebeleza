@@ -24,7 +24,7 @@ td {
     border-top: 4px solid #f5f5f5;
 }
 td:nth-child(1) {
-    width: 55%;
+    width: 50%;
 }
 
 td:nth-child(2) {
@@ -36,7 +36,7 @@ td:nth-child(2) {
 }
 
 .btn {
-    padding: 0.35rem .75rem;
+    padding: 0.4rem .75rem;
     border-radius: 4px;
     background-color: #05595B;
     color: white;
@@ -61,6 +61,11 @@ td:nth-child(2) {
     align-items: center;
     gap: .5rem;
     margin-left: 0.3rem;
+    padding:.125rem .5rem;
+}
+
+.icon-adicionar {
+    font-size: .85rem;
 }
 
 .btn-listagem {

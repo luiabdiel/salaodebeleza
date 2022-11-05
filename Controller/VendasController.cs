@@ -59,6 +59,14 @@ namespace salaodebeleza.Controller {
             if (HoraExists(venda.DataAgendamento, venda.ID) || venda.DataAgendamento < venda.DataEmissao) {
                 return NotFound();
             }
+
+            var Tempo = venda.TempoEstimado;
+            var NovoTempo = venda.DataAgendamento.AddMinutes(Tempo);
+            var TemHorario = _context.Vendas.Any(x => x.DataAgendamento >= venda.DataAgendamento.AddMinutes(-Tempo) && x.DataAgendamento <= venda.DataAgendamento.AddMinutes(Tempo));
+            if (TemHorario) {
+                return NotFound();
+            }
+
             else {
                 if (id != venda.ID) {
                     return BadRequest();
@@ -100,11 +108,13 @@ namespace salaodebeleza.Controller {
         [HttpPost]
         public async Task<ActionResult<Venda>> PostVenda(Venda venda)
         {
-            var Hora = venda.DataAgendamento.AddMinutes(30);
+            //var Hora = venda.DataAgendamento.AddMinutes(30);
             if (HoraExists(venda.DataAgendamento, venda.ID) || venda.DataAgendamento < venda.DataEmissao) {
                 return BadRequest();
             }
-            var TemHorario = _context.Vendas.Any(x => x.DataAgendamento >= venda.DataAgendamento.AddMinutes(-30) && x.DataAgendamento <= venda.DataAgendamento.AddMinutes(30));
+            var Tempo = venda.TempoEstimado;
+            var NovoTempo = venda.DataAgendamento.AddMinutes(Tempo);
+            var TemHorario = _context.Vendas.Any(x => x.DataAgendamento >= venda.DataAgendamento.AddMinutes(-Tempo) && x.DataAgendamento <= venda.DataAgendamento.AddMinutes(Tempo));
             if (TemHorario) {
                 return NotFound();
             }

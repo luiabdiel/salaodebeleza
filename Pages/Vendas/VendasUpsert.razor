@@ -20,7 +20,7 @@ else
             <h6 class="w-100 fw-bold">Dados Gerais</h6>
 
             <div class="mx-1 col-6">
-                <label class="form-label">Cliente</label>
+                <label class="form-label">Clientes</label>
                 <select @bind="Venda.ClienteID" class="form-select">
                     @foreach (var cliente in Clientes)
                     {
@@ -42,16 +42,16 @@ else
         <section class="my-4">
             <div class="d-flex flex-wrap form-vendas align-items-end">
                 <div class="mx-1 col-6">
-                    <label class="form-label">Servico</label>
+                    <label class="form-label">Servicos</label>
                     <select @bind="ServicoIdAtual" class="form-select">
                         <option value="0">Selecione Um Produto ou Servico</option>
-                            <optgroup label="Produto">
+                            <optgroup label="Produtos">
                         @foreach (var servico in Servicos.Where(prod => !Venda.Itens.Select(item => item.ServicoID).Contains(prod.ID)).Where(prod => prod.Tipo == 1))
                         {
                             <option value="@servico.ID">@servico.Descricao - @servico.Preco.Formatado()</option>
                         }
                             </optgroup>
-                            <optgroup label="Servico">
+                            <optgroup label="Servicos">
                         @foreach (var servico in Servicos.Where(prod => !Venda.Itens.Select(item => item.ServicoID).Contains(prod.ID)).Where(prod => prod.Tipo == 2))
                         {
                             <option value="@servico.ID">@servico.Descricao - @servico.Preco.Formatado()</option>
@@ -65,8 +65,9 @@ else
                     <input @bind="QuantidadeAtual" class="form-control" />
                 </div>
 
-                <div>
-                    <button type="button" @onclick="AdicionarServico" class="btn btn-adicionar">Adicionar <i class="fa-solid fa-plus"></i></button>
+                 <div class="mx-1 col-2">
+                    <label class="form-label">Tempo Estimado</label>
+                    <input @bind="Venda.TempoEstimado" class="form-control" />
                 </div>
                 <div class="mx-1 col-6 mt-3">
                     <label class="form-label">Selecione o tipo:</label>
@@ -76,6 +77,9 @@ else
                         <option value="3">Finalizado</option>
                         <ValidationMessage For="(() => Venda.Status)" />
                     </select>
+                </div>
+                <div>
+                    <button type="button" @onclick="AdicionarServico" class="btn btn-adicionar">Adicionar <i class="fa-solid fa-plus icon-adicionar"></i></button>
                 </div>
             </div>
 
@@ -88,6 +92,7 @@ else
                 <table>
                     <thead>
                     <th>Servico</th>
+                    <th>Quantidade</th>
                     <th>Preço</th>
                     <th>Valor Total</th>
                     <th></th>
@@ -95,8 +100,9 @@ else
                     <tbody>
                         @foreach (var item in Venda.Itens)
                         {
-                            <tr>
+                            <tr>    
                                 <td>@item.Servico.Descricao</td>
+                                <td>@QuantidadeAtual</td>
                                 <td><input class="form-control input-preco" @bind="item.Preco" /></td>
                                 <td>@item.ValorTotal().Formatado()</td>
                                 <td class="text-end">
@@ -129,7 +135,8 @@ else
 
     public List<Servico> Servicos { get; set; }
     public int ServicoIdAtual { get; set; }
-    public double QuantidadeAtual { get; set; }
+    public double QuantidadeAtual { get; set; } = 1;
+    public int TempoEstimado { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -214,7 +221,7 @@ else
             Venda.Itens.Add(item);
 
             ServicoIdAtual = 0;
-            QuantidadeAtual = 0;
+            QuantidadeAtual = 1;
         }
         catch (Exception ex)
         {
