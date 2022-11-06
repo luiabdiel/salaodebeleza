@@ -19,7 +19,7 @@ else
         <section class="d-flex flex-wrap">
             <div class="mx-1 col-6">
                 <label class="form-label">Nome</label>
-                <input class="form-control" pattern="[A-Z][a-z].* [A-Z][a-z].*" @bind="Cliente.Nome" placeholder="Dígite seu nome completo" />
+                <input type="text" class="form-control" pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$" @bind="Cliente.Nome" placeholder="Dígite seu nome completo" />
                 <ValidationMessage For="(() => Cliente.Nome)" />
             </div>
 

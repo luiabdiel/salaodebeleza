@@ -61,37 +61,23 @@ namespace salaodebeleza.Controller
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCliente(int id, Cliente cliente)
         {
-            if (ClienteExistsCpf(cliente.CPF))
-            {
+            if (!ClienteExistsCpf(cliente.CPF)) {
                 return NotFound();
             }
-            else
-            {
-                _context.Clientes.Add(cliente);
-                await _context.SaveChangesAsync();
-                return CreatedAtAction("GetCliente", new { id = cliente.ID }, cliente);
-            }
-        
-            if (id != cliente.ID)
-            {
+            if (id != cliente.ID) {
                 return BadRequest();
             }
 
-
             _context.Entry(cliente).State = EntityState.Modified;
 
-            try
-            {
+            try {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ClienteExists(id))
-                {
+            catch (DbUpdateConcurrencyException) {
+                if (!ClienteExists(id)) {
                     return NotFound();
                 }
-                else
-                {
+                else {
                     throw;
                 }
             }
@@ -135,11 +121,15 @@ namespace salaodebeleza.Controller
 
         private bool ClienteExists(int id)=>
             _context.Clientes.Any(e => e.ID == id);
-        
-        private bool ClienteExistsCpf(string cpf) =>
-            _context.Clientes.Any(e => e.CPF.Equals(cpf));
-            
-        
+
+        private bool ClienteExistsCpf(string cpf)
+        {
+            if (_context.Clientes.Any(e => e.CPF.Equals(cpf))) {
+                return true;
+            }
+            return false;
+        }
+
         bool ClienteEmUso(int clienteID) =>
             _context.Vendas.Any(x => x.ClienteID == clienteID);
     }
