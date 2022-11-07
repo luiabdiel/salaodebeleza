@@ -61,7 +61,7 @@ namespace salaodebeleza.Controller
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCliente(int id, Cliente cliente)
         {
-            if (!ClienteExistsCpf(cliente.CPF)) {
+            if (ClienteExistsCpf(cliente.CPF, cliente.ID)) {
                 return NotFound();
             }
             if (id != cliente.ID) {
@@ -91,7 +91,7 @@ namespace salaodebeleza.Controller
         public async Task<ActionResult<Cliente>> PostCliente(Cliente cliente)
         {
 
-            if (ClienteExistsCpf(cliente.CPF))
+            if (ClienteExistsCpf(cliente.CPF, cliente.ID))
             {
                 return NotFound();
             }
@@ -122,13 +122,9 @@ namespace salaodebeleza.Controller
         private bool ClienteExists(int id)=>
             _context.Clientes.Any(e => e.ID == id);
 
-        private bool ClienteExistsCpf(string cpf)
-        {
-            if (_context.Clientes.Any(e => e.CPF.Equals(cpf))) {
-                return true;
-            }
-            return false;
-        }
+        private bool ClienteExistsCpf(string cpf, int id) =>
+            _context.Clientes.Where(e => e.ID != id).Any(e => e.CPF == cpf);
+            
 
         bool ClienteEmUso(int clienteID) =>
             _context.Vendas.Any(x => x.ClienteID == clienteID);
