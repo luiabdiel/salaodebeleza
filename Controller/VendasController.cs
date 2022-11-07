@@ -101,17 +101,20 @@ namespace salaodebeleza.Controller {
     // POST: api/Vendas
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-        public async Task<ActionResult<Venda>> PostVenda(Venda venda)
+        public async Task<ActionResult<Venda>> PostVenda(Venda venda, int status)
         {
-            //var Hora = venda.DataAgendamento.AddMinutes(30);
-            if (HoraExists(venda.DataAgendamento, venda.ID) || venda.DataAgendamento < venda.DataEmissao) {
-                return BadRequest();
-            }
-            var Tempo = venda.TempoEstimado;
-            var NovoTempo = venda.DataAgendamento.AddMinutes(Tempo);
-            var TemHorario = _context.Vendas.Any(x => x.DataAgendamento >= venda.DataAgendamento.AddMinutes(-Tempo) && x.DataAgendamento <= venda.DataAgendamento.AddMinutes(Tempo));
-            if (TemHorario) {
-                return NotFound();
+            if (AgendamentoFinalizado(status))
+            {
+                if (HoraExists(venda.DataAgendamento, venda.ID) || venda.DataAgendamento < venda.DataEmissao) {
+
+                    var Tempo = venda.TempoEstimado;
+                    var TemHorario = _context.Vendas.Any(x => x.DataAgendamento >= venda.DataAgendamento.AddMinutes(-Tempo) && x.DataAgendamento <= venda.DataAgendamento.AddMinutes(Tempo));
+                    if (TemHorario) {
+                        return NotFound();
+                    }
+                    return BadRequest();
+                }
+                return Ok();
             }
             else {
                 try {
@@ -154,6 +157,14 @@ namespace salaodebeleza.Controller {
         {
             if (!VendaExists(id)) {
                 return _context.Vendas.Any(e => e.DataAgendamento == dataAgendamento);
+            }
+            return false;
+        }
+        private bool AgendamentoFinalizado(int Status)
+        {
+            if (_context.Vendas.Any(e => e.Status != 3))
+            {
+                return true;
             }
             return false;
         }
