@@ -60,25 +60,20 @@ namespace salaodebeleza.Controller {
                 return NotFound();
             }
 
-            var Tempo = venda.TempoEstimado;
-            var NovoTempo = venda.DataAgendamento.AddMinutes(Tempo);
-            var TemHorario = _context.Vendas.Any(x => x.DataAgendamento >= venda.DataAgendamento.AddMinutes(-Tempo) && x.DataAgendamento <= venda.DataAgendamento.AddMinutes(Tempo));
-            if (TemHorario) {
-                return NotFound();
+            //var Tempo = venda.TempoEstimado;
+            //var NovoTempo = venda.DataAgendamento.AddMinutes(Tempo);
+            //var TemHorario = _context.Vendas.Any(x => x.DataAgendamento >= venda.DataAgendamento.AddMinutes(-Tempo) && x.DataAgendamento <= venda.DataAgendamento.AddMinutes(Tempo));
+            
+            if (id != venda.ID) {
+                return BadRequest();
             }
 
-            else {
-                if (id != venda.ID) {
-                    return BadRequest();
-                }
+            _context.Update(venda);
 
-                _context.Update(venda);
-
-                //Determinando como Adicionado os itens de ID = 0
-                foreach (var item in venda.Itens) {
-                    if (item.ID == 0) {
-                        _context.Entry(item).State = EntityState.Added;
-                    }
+            //Determinando como Adicionado os itens de ID = 0
+            foreach (var item in venda.Itens) {
+                if (item.ID == 0) {
+                    _context.Entry(item).State = EntityState.Added;
                 }
             }
             //Remover itens do banco
@@ -99,13 +94,13 @@ namespace salaodebeleza.Controller {
                     throw;
                 }
             }
-
             return NoContent();
         }
 
-        // POST: api/Vendas
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+
+    // POST: api/Vendas
+    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [HttpPost]
         public async Task<ActionResult<Venda>> PostVenda(Venda venda)
         {
             //var Hora = venda.DataAgendamento.AddMinutes(30);
