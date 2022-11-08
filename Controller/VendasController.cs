@@ -103,18 +103,16 @@ namespace salaodebeleza.Controller {
     [HttpPost]
         public async Task<ActionResult<Venda>> PostVenda(Venda venda, int status)
         {
-            if (AgendamentoFinalizado(status))
+            if (HoraExists(venda.DataAgendamento, venda.ID) || venda.DataAgendamento < venda.DataEmissao)
             {
-                if (HoraExists(venda.DataAgendamento, venda.ID) || venda.DataAgendamento < venda.DataEmissao) {
-
-                    var Tempo = venda.TempoEstimado;
-                    var TemHorario = _context.Vendas.Any(x => x.DataAgendamento >= venda.DataAgendamento.AddMinutes(-Tempo) && x.DataAgendamento <= venda.DataAgendamento.AddMinutes(Tempo));
-                    if (TemHorario) {
-                        return NotFound();
-                    }
-                    return BadRequest();
-                }
-                return Ok();
+                return BadRequest();
+            }
+            var Tempo = venda.TempoEstimado;
+            var NovoTempo = venda.DataAgendamento.AddMinutes(Tempo);
+            var TemHorario = _context.Vendas.Any(x => x.DataAgendamento >= venda.DataAgendamento.AddMinutes(-Tempo) && x.DataAgendamento <= venda.DataAgendamento.AddMinutes(Tempo));
+            if (TemHorario)
+            {
+                return NotFound();
             }
             else {
                 try {
